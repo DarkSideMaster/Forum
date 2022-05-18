@@ -1,11 +1,11 @@
 using Forum.Data;
+using Forum.ForumServises;
 using Forum.Models;
 using Forum.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("ForumDBConnection") ?? throw new InvalidOperationException("Connection string 'ForumDBConnection' not found."); ;
@@ -19,6 +19,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
     .AddDefaultUI();
 
 builder.Services.AddScoped<IForums, ForumService>();
+builder.Services.AddScoped<IPosts, PostService>();
 
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();
