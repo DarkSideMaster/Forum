@@ -9,7 +9,7 @@ namespace Forum.Services
 
         private readonly ApplicationDbContext _context;
 
-        public ForumService(ApplicationDbContext context) 
+        public ForumService(ApplicationDbContext context)
         {
             _context = context;
 
@@ -27,7 +27,7 @@ namespace Forum.Services
 
         public IEnumerable<Forums> GetAll()
         {
-            return _context.Forums.Include( forum=>forum.Posts);
+            return _context.Forums.Include(forum => forum.Posts);
         }
 
         public IEnumerable<ApplicationUser> GetAllActiveUsers()
@@ -37,7 +37,12 @@ namespace Forum.Services
 
         public Forums GetbyId(int Id)
         {
-            throw new NotImplementedException();
+            var forum = _context.Forums.Where(x => x.Id == Id)
+                .Include(f => f.Posts).ThenInclude(u => u.User)
+                .Include(f => f.Posts).ThenInclude(u => u.Replies).ThenInclude(r => r.User)
+                .FirstOrDefault();
+
+            return forum;
         }
 
         public Task UpdateForumDescription(int forumId, string newDescription)

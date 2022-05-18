@@ -1,5 +1,6 @@
 using Forum.Data;
 using Forum.Models;
+using Forum.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,9 +18,10 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
     .AddDefaultTokenProviders()
     .AddDefaultUI();
 
+builder.Services.AddScoped<IForums, ForumService>();
+
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
