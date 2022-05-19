@@ -55,14 +55,9 @@ namespace Forum.ForumServises
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Post> GetLastesPost(int n)
+        public IEnumerable<Post> GetLastestPost(int n)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Post> GetLastestPost(int n, string newContent)
-        {
-           return GetAll().OrderByDescending(post => post.Created).Take(n);
+            return GetAll().OrderByDescending(post => post.Created).Take(n);
         }
 
         public IEnumerable<Post> GetPostsByForum(int id)
