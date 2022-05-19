@@ -1,9 +1,9 @@
 ﻿@model Forum.Models.ForumTopicModel
 
-<h1>Добро пожаловать на форум посвященный языку @Model.Forum.Name </h1>
+<h1>Ласкаво просимо на форум присвячений язику програмування @Model.Forum.Name </h1>
 
 <span id="headingButton">
-    <a asp-controller="Post" asp-action="CreatePost" asp-route-id="@Model.Forum.Id" class="btn btn-newPost">Добавить сообщение</a>
+    <a asp-controller="Post" asp-action="CreatePost" asp-route-id="@Model.Forum.Id" class="btn btn-newPost">Додати повідомлення</a>
 </span>
 
 @if (Model.Posts.Any())
@@ -36,11 +36,11 @@ else
 {
     <div class="noPosts">
         <h3>
-            Похоже, в этой теме @Model.Forum.Name  еще нет ответов.
+            Схоже, в цій темі @Model.Forum.Name  ще нема відповідей.
             <br />
-            Вы можете
+            Ви можете
             <a asp-controller="Post" asp-action="CreatePost" asp-route-id="@Model.Forum.Id">
-                <span>начать обсуждение!</span>
+                <span>почати діскусію саме зараз!</span>
             </a>
         </h3>
     </div>

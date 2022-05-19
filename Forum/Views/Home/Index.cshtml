@@ -1,8 +1,54 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model Forum.Models.Home.HomeIndexModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container body-content">
+    <div class="row frontPageSpalsh"></div>
+    <div class="col-md-6 frontPageLearn">
+        <div class="frontPageHeading">Вивчай, спілкуйся, ділись знаннями</div>
+        <p class="frontPageSubHeading">Кращій форум з прогамування</p>
+        <div>
+            <form asp-controller="Serach" asp-action="Search" method="post">
+                <input asp-for="SearchQuery" type="text" class="homeSearch" placeholder="Пошук..." />
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6"></div>
+    <div class="row frontPageContent">
+        <h3 id="latestPost">Останні повідомлення</h3>
+        <table class="table table-hover" id="latestPostTable">
+            <tbody>
+                @foreach (var post in Model.LatestPost)
+                {
+                    <tr>
+                        <td>
+                            <div class="forumLogo" style="background-image: url(@post.Forum.ImageUrl); background-size=100%"></div>
+                            <div class="postTitle">
+                                <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">
+                                    @post.Title
+                                </a>
+                            </div>
+                            <div class="posSubTitle">
+                                @if (post.RepliesCount == 1)
+                                {
+                                    <span>@post.RepliesCount віповідь</span>
+                                }
+                                else if (post.RepliesCount == 0)
+                                {
+                                    <span>Немає віповідей</span>
+                                }
+                                else
+                                {
+                                    <span>@post.RepliesCount віповідей</span>
+                                }
+                                <span class="postUser">
+                                    <a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId">
+                                        @post.Author
+                                    </a>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

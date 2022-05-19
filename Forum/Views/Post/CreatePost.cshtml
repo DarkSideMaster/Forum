@@ -1,6 +1,6 @@
 ﻿@model Forum.Models.Posts.NewPostModel
 
-<h1>Новое сообщение  @Model.ForumName</h1>
+<h1>Нове повідомлення  @Model.ForumName</h1>
 
 <form asp-action="AddPost" method="post" id="addPostForm">
     <div class="form-group">
@@ -11,6 +11,6 @@
         <label asp-for="Title"></label>
         <textarea asp-for="Content" class="form-control"></textarea>
     </div>
-    <button type="submit" id="submitPostBtn" class="btn btn-submitPost">Добавить сообщение</button>
+    <button type="submit" id="submitPostBtn" class="btn-info">Додати повідомлення</button>
     <input asp-for="ForumId" type="hidden" />
 </form>
