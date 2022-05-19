@@ -45,8 +45,10 @@ namespace Forum.Controllers
                 Id = post.Id,
                 AuthorId = post.User.Id,
                 AuthorRating = post.User.Rating,
-                Title = post.Created.ToString(),
+                Title = post.Title,
                 RepliesCount = post.Replies.Count(),
+                DatePosted = post.Created.ToShortDateString(),
+                Author = post.User.UserName,
                 Forum = BuildForumListing(post)
 
             });
