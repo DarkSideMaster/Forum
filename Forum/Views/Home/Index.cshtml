@@ -1,14 +1,15 @@
 ﻿@model Forum.Models.Home.HomeIndexModel
 
 <div class="container body-content">
-    <div class="row frontPageSpalsh"></div>
-    <div class="col-md-6 frontPageLearn">
-        <div class="frontPageHeading">Вивчай, спілкуйся, ділись знаннями</div>
-        <p class="frontPageSubHeading">Кращій форум з прогамування</p>
-        <div>
-            <form asp-controller="Serach" asp-action="Search" method="post">
-                <input asp-for="SearchQuery" type="text" class="homeSearch" placeholder="Пошук..." />
-            </form>
+    <div class="row frontPageSpalsh">
+        <div class="col-md-6 frontPageLearn">
+            <div class="frontPageHeading">Вивчай, спілкуйся, ділись знаннями</div>
+            <p class="frontPageSubHeading">Кращій форум з прогамування</p>
+            <div>
+                <form asp-controller="Serach" asp-action="Search" method="post">
+                    <input asp-for="SearchQuery" type="text" class="homeSearch" placeholder="Пошук..." />
+                </form>
+            </div>
         </div>
     </div>
     <div class="col-md-6"></div>

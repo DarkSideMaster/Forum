@@ -18,10 +18,10 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark main-nav">
             <div class="container justify-content-center">
+                <div class="navbar-header">
+                    <a class="navbar-brand navbarLogo" asp-controller="Forums" asp-action="Index"></a>
+                </div>
                 <ul class="nav navbar-nav flex-fill w-100 flex-nowrap">
-                    <li class="nav-item active">
-                        <a class="nav-link" asp-controller="Forums" asp-action="Index">Форуми</a>
-                    </li>
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li class="dropdown">
@@ -64,7 +64,7 @@
                             </span>
                         </li>
                         <li class="nav-item">
-                            <form  class="nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                            <form class="nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
                                 <button type="submit" class=" btn nav-link">Вийти</button>
                             </form>
                         </li>

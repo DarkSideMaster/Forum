@@ -22,3 +22,69 @@ body {
     background-attachment: fixed;
     background-position: center;
 }
+
+.navbar {
+    box-shadow: 0 5px 4px -6px #000;
+}
+
+    .navbar li {
+        font-weight: bold;
+    }
+
+.postHeading {
+    color: white;
+    font-size: 1.3em;
+    font-family: 'Roboto';
+    padding: 16px 0 16px 0;
+}
+
+
+.sectionHeader {
+    background-color: rgba(0,0,0,0.9);
+    padding: 8px 0 24px 24px;
+}
+
+.sectionHeading {
+    color: white;
+    font-size: 1.3em;
+    font-family: 'Roboto';
+    padding: 16px 0 16px 0;
+    border-bottom: 1px solid #335;
+    margin-bottom: 12px;
+}
+
+.sectionInfo {
+    height: 400px;
+    background-color:white;
+}
+
+.frontPageSpalsh {
+    font-family: 'Roboto';
+    padding: 12px 0 0 32px;
+    height:360px;
+}
+
+.sectionDescription {
+    color: #EEE;
+}
+
+.frontPageHeading {
+    font-size: 3.2em;
+    margin: 16px 0;
+}
+
+.frontPageLearn {
+    height: 330px;
+    background-image: url("../images/forum/forumSplash.jpg");
+    background-repeat: no-repeat;
+    background-position: right;
+    width:100%;
+}
+
+.navbarLogo {
+    background-image: url("../images/forum/logo1.png");
+    background-repeat: no-repeat;
+    padding-right: 56px;
+    width: 150px;
+    margin-right: 12px;
+}
