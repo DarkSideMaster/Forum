@@ -16,70 +16,72 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">На головну</a>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-controller="Forums" asp-action="Index">Форуми</a>
-                        </li>
-
-
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Налаштування<span class="caret"></span></a>
-                                <ul>
-                                    <li role="separator" class="divider"></li>
-                                    <li class="dropdown-header">Профіль</li>
-                                    <li><a asp-controller="Profile" asp-action="Detail">Мій профіль</a></li>
-                                    @if (User.IsInRole("Admin"))
-                                    {
-                                        <li role="separator" class="divider"></li>
-                                        <li class="dropdown-header">Адмінстратор</li>
-                                        <li><a asp-controller="Forum" asp-action="Create">Створити форум</a></li>
-                                        <li><a asp-controller="Profile" asp-action="Index">Користувачі</a></li>
-                                    }
-                                </ul>
-                            </li>
-                        }
-                        }
-                    </ul>
-                    @if (!SignInManager.IsSignedIn(User))
-                    {
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a  class="nav-link text-light" asp-controller="Account" asp-action="Login">Увійти</a>
-                            </li>
-                            <li class="nav-item">
-                                <a  class="nav-link text-light" asp-controller="Account" asp-action="Register">Регістрація</a>
-                            </li>
-                        </ul>
-                    }
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark main-nav">
+            <div class="container justify-content-center">
+                <ul class="nav navbar-nav flex-fill w-100 flex-nowrap">
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-controller="Forums" asp-action="Index">Форуми</a>
+                    </li>
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
-                            <ul class="nav navbar-nav navbar-right">
-                               <li class="nav-item">
-                                   Вітаємо, @UserManager.GetUserName(User)
-                               </li>
-                             
-                                <li class="nav-item">
-                                    <a asp-controller="Account" asp-action="Logout">Вийти</a>
-                                </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Налаштування
+                                <span class="caret"></span>
+                            </a>
+                            <ul>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Профіль</li>
+                                <li><a asp-controller="Profile" asp-action="Detail">Мій профіль</a></li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Адмінстратор</li>
+                                    <li><a asp-controller="Forums" asp-action="Create">Створити форум</a></li>
+                                    <li><a asp-controller="Profile" asp-action="Index">Користувачі</a></li>
+                                }
                             </ul>
-                        </form>
+                        </li>
                     }
+                </ul>
+                @if (!SignInManager.IsSignedIn(User))
+                {
+                    <ul class="nav navbar-nav flex-fill w-100 justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Увійти</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Регістрація</a>
+                        </li>
+                    </ul>
+                }
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <ul class="nav navbar-nav flex-fill w-100 justify-content-end">
+                        <li class="nav-item" style="margin-top:1.5%">
+                            <span class="nav-link">
+                                Вітаємо, @UserManager.GetUserName(User)
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <form  class="nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                                <button type="submit" class=" btn nav-link">Вийти</button>
+                            </form>
+                        </li>
+                    </ul>
+                }
 
-
-
-
-
-
-
-                    <partial name="_LoginPartial" />
-                </div>
+                @*<ul class="nav navbar-nav flex-fill justify-content-center">
+                <li class="nav-item"><a class="nav-link" href="#">Center</a></li>
+                </ul>
+                <ul class="nav navbar-nav flex-fill w-100 justify-content-end">
+                <li class="nav-item">
+                <a class="nav-link" href="#">Help</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+                </li>
+                </ul>*@
             </div>
         </nav>
     </header>
