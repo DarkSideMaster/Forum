@@ -12,6 +12,8 @@ namespace Forum.Models.Posts
         public DateTime Created { set; get; }
         public string AuthorImageUrl { set; get; }
         public string PostContent { set; get; }
+        public int ForumId { set; get; }
+        public string ForumName { set; get; }
 
         public IEnumerable<PostReplyModel> Replies { set; get; }
 

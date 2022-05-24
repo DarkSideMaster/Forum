@@ -36,7 +36,9 @@ namespace Forum.Controllers
                 AuthorRating = post.User.Rating,
                 Created = post.Created,
                 PostContent = post.Content,
-                Replies = replies
+                Replies = replies,
+                ForumId = post.Forums.Id,
+                ForumName = post.Forums.Title
             };
 
             return View(model);

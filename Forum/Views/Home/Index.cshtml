@@ -4,7 +4,7 @@
     <div class="row frontPageSpalsh">
         <div class="col-md-6 frontPageLearn">
             <div class="frontPageHeading">Вивчай, спілкуйся, ділись знаннями</div>
-            <p class="frontPageSubHeading">Кращій форум з прогамування</p>
+            <p class="frontPageSubHeading">Кращій форум з програмування</p>
             <div>
                 <form asp-controller="Serach" asp-action="Search" method="post">
                     <input asp-for="SearchQuery" type="text" class="homeSearch" placeholder="Пошук..." />
@@ -21,7 +21,7 @@
                 {
                     <tr>
                         <td>
-                            <div class="forumLogo" style="background-image: url(@post.Forum.ImageUrl); background-size=100%"></div>
+                            <div class="forumLogo" style="background-image: url(@post.Forum.ImageUrl);"></div>
                             <div class="postTitle">
                                 <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">
                                     @post.Title

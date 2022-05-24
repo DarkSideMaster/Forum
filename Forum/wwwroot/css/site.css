@@ -55,7 +55,7 @@ body {
 
 .sectionInfo {
     height: 400px;
-    background-color:white;
+    background-color: white;
 }
 
 .frontPageSpalsh {
@@ -79,14 +79,22 @@ body {
     background-image: url("../images/forum/forumSplash.jpg");
     background-repeat: no-repeat;
     background-position: right;
-    width:100%;
+    width: 100%;
 }
 
-.postTitle a {
-    font-size:1.5em;
-    color:indigo;
-
+.frontPageContent {
+    background-color: rgba(255,255,255,0.9);
+    padding: 16px;
 }
+
+#latestsPosts {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin: 4px 0 16px 0;
+}
+
+
 .frontPageSubHeading {
     font-size: 2em;
     font-weight: bold;
@@ -100,6 +108,27 @@ body {
 }
 
 
+.homeSearch {
+    width: 100%;
+    margin-top: 8px;
+    background: rgba(0,0,0,0.1);
+    padding: 8px;
+    border: 0px;
+    height: 2.3em;
+    font-size: 2.1em;
+    font-family: 'Roboto Mono';
+    font-weight: bold;
+    transition: ease-in 0.2s;
+}
+
+    .homeSearch:focus {
+        border: none !important;
+        outline: none !important;
+        transition: ease-in 0.2s;
+        color: #03A9F4;
+        background-color: rgba(0,0,0, 0.7);
+        box-shadow: 0 5px 4px -6px #000;
+    }
 
 .navbarLogo {
     background-image: url("../images/forum/logo1.png");
@@ -107,4 +136,112 @@ body {
     padding-right: 56px;
     width: 150px;
     margin-right: 12px;
+}
+
+.postTitle {
+    font-family: 'Roboto';
+    font-weight: bold;
+}
+
+.postSubTitle {
+    color: #888;
+    font-family: 'Roboto Mono';
+    font-size: 0.8em;
+}
+
+.postData {
+    display: inline-block;
+}
+
+.postDate {
+    color: #888;
+    font-family: 'Roboto Mono';
+    font-size: 0.8em;
+}
+
+.postLogo {
+    display: inline-block;
+    border-radius: 3px;
+    margin-right: 20px;
+    height: 40px;
+    width: 40px;
+    background-color: #ddd;
+}
+
+#formIndexTable td {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+#forumIndexTable tr:hover {
+    background-color: rgba(0, 116, 238, 1);
+}
+
+.forumData {
+    display: inline-block;
+}
+
+.forumTitle {
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.forumSubTitle {
+    font-family: 'Roboto Mono';
+    font-size: 0.8em;
+    color: #888;
+}
+
+.forumDescription {
+    font-family: 'Roboto';
+    color: #555;
+}
+
+.forumLogo {
+    border-radius: 3px;
+    float: left;
+    margin-right: 20px;
+    height: 40px;
+    width: 40px;
+    background-color: #ddd;
+    border: 1px solid #555;
+    background-size:100%;
+}
+
+.forumPostCount {
+    color: #888;
+    font-family: 'Roboto Mono';
+    font-size: 0.9em;
+}
+
+.forumMemberCount {
+    color: #888;
+    font-family: 'Roboto Mono';
+    font-size: 0.9em;
+}
+
+#fornIndexContent {
+    padding-bottom: 60px;
+    background-color: white;
+}
+
+.noPosts {
+    text-align: center;
+    padding-top: 30px;
+    font-family: 'Roboto Mono'
+}
+
+.createPostSection {
+    background-color: #fff;
+    padding: 24px;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
 }

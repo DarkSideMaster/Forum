@@ -1,33 +1,44 @@
 ﻿@model Forum.Models.Posts.PostIndexModel
 
+<div class="container body-content">
+    <div class="row postHeader">
+        <div class="postHeding">
+            <span class="postIndexTitle">
+                @Model.Title
+            </span>
+            <span id="headingBtn"><a asp-controller="Forums" asp-action="Topic" asp-route-id="@Model.ForumId" class="btn btn-back">Повернутися до @Model.ForumName</a></span>
+        </div>
+    </div>
+</div>
 
-<h3>@Model.Title</h3>
 
-<table class="table table-hover" id="forumIndexTable">
-    <tbody>
-        <tr>
-            <td>
-                @Model.AuthorName
-                <br />
-                Рейтинг: @Model.AuthorRating
-            </td>
-            <td>
-                @Model.PostContent
-            </td>
-        </tr>
+<div>
+    Автор: @Model.AuthorName (@Model.AuthorRating)
+    Створено: @Model.Created
+</div>
 
-        @foreach (var reply in @Model.Replies)
-        {
-            <tr>
-                <td>
-                    @reply.AuthorName
-                    <br />
-                    Рейтинг: @reply.AuthorRating
-                </td>
-                <td>
-                    @reply.ReplayContent
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div>
+    @Model.PostContent
+</div>
+
+
+
+@if (@Model.Replies.Any())
+{
+    @foreach (var reply in @Model.Replies)
+    {
+
+        <div>
+            <div>
+                Відповів: @reply.AuthorName
+                Дата віповіді: @reply.Created
+            </div>
+            <div>
+                Відповідь: @reply.ReplayContent
+            </div>
+        </div>
+    }
+}
+
+
+
