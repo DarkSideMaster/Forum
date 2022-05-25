@@ -8,7 +8,7 @@
                 <div class="serachForum">
                     <input asp-for="SearchQuery" type="text" placeholder="Пошук..." class="searchBar" onfocus="clearThis(this)">
                     <button type="submit" class="btn btn-forumSearch">
-                        <span class="material-icons">search</span>
+                        <span class="material-icons forumSearchIcon">search</span>
                     </button>
                 </div>
             </form>
@@ -38,7 +38,7 @@
                                                 </a>
                                             </span>
                                             (@post.AuthorRating)
-                                            у:
+                                            у форумі:
                                             <span class="postForum">
                                                 <a asp-controller="Forums" asp-action="Topic" asp-route-id="@post.Forum.Id">@post.Forum.Name</a>
                                             </span>
@@ -64,10 +64,13 @@
         else
         {
             <div class="noPost">
-                <i class="material-icons md-72">відповідь</i>
+                <span class="material-icons globalSearchIcon">search_off</span>
                 <h3>
-                    Не знайдено жодного результату за запитом @Model.SearchQuery. <br />
+                    Нажаль, нічого не знайдено за запитом "@Model.SearchQuery." <br />
                 </h3>
+                 <a asp-controller="Home" asp-action="Index">
+                        <span>Повернутись на головну сторінку</span>
+                    </a>
             </div>
         }
     </div>

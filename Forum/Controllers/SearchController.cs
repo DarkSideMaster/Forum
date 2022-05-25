@@ -62,7 +62,6 @@ namespace Forum.Controllers
         [HttpPost]
         public IActionResult Search(string searchQuery)
         {
-
             return RedirectToAction("Results", new { searchQuery });
         }
     }

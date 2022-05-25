@@ -14,7 +14,7 @@
                 <div class="serachForum">
                     <input asp-for="SearchQuery" type="text" placeholder="Пошук..." class="searchBar" onfocus="clearThis(this)">
                     <button type="submit" class="btn btn-forumSearch">
-                        <span class="material-icons">search</span>
+                        <span class="material-icons forumSearchIcon">search</span>
                     </button>
                 </div>
                 <input asp-for="Forum.Id" name="id" type="hidden">
@@ -81,15 +81,27 @@
                 </tbody>
             </table>
         }
-        else
+        else if (string.IsNullOrEmpty(Model.SearchQuery))
         {
             <div class="noPost">
-                <i class="material-icons md-72">відповідь</i>
+                <span class="material-icons forumSearchIcon">info</span>
                 <h3>
                     Схоже, тут ще немає відповідей.
                     Почніть обговорення прямо
-                    <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">
+                    <a asp-controller="Post" asp-action="CreatePost" asp-route-id="@Model.Forum.Id">
                         <span>зараз!</span>
+                    </a>
+                </h3>
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(Model.SearchQuery) && !Model.isSearchSucsses)
+        {
+          <div class="noPost">
+                <span class="material-icons globalSearchIcon">search_off</span>
+                <h3>
+                    Нажаль, нічого не знайдено за запитом "@Model.SearchQuery." <br />
+                    <a asp-controller="Forums" asp-action="Topic" asp-route-id="@Model.Forum.Id">
+                        <span>Повернутись до форуму</span>
                     </a>
                 </h3>
             </div>

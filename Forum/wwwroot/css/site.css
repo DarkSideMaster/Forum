@@ -107,6 +107,13 @@ body {
     font-family: 'Roboto';
 }
 
+.globalSearchIcon {
+    font-size:46px !important;
+    color:red;
+}
+.forumSearchIcon {
+    font-size: 39px !important;
+}
 
 .homeSearch {
     width: 100%;
@@ -115,7 +122,7 @@ body {
     padding: 8px;
     border: 0px;
     height: 2.3em;
-    font-size: 2.1em;
+    font-size: 1.4em;
     font-family: 'Roboto Mono';
     font-weight: bold;
     transition: ease-in 0.2s;

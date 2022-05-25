@@ -42,9 +42,15 @@ namespace Forum.Controllers
 
             var posts = new List<Post>();
 
+            var isSucssesSearch = true; 
+
             if (!string.IsNullOrEmpty(searchQuery))
             {
                  posts = _postService.GetFiltredPosts(id, searchQuery).ToList();
+                if (posts!=null && posts.Count==0)
+                {
+                    isSucssesSearch = false;
+                }
             }
             else
             {
@@ -59,7 +65,7 @@ namespace Forum.Controllers
                 Title = post.Title,
                 RepliesCount = post.Replies.Count(),
                 DatePosted = post.Created.ToShortDateString(),
-                Author = post.User.UserName,
+                Author = post.User.UserName,             
                 Forum = BuildForumListing(post)
 
             });
@@ -67,7 +73,9 @@ namespace Forum.Controllers
             var model = new ForumTopicModel
             {
                 Posts = postListings,
-                Forum = BuildForumListing(forums)
+                Forum = BuildForumListing(forums),
+                isSearchSucsses = isSucssesSearch,
+                SearchQuery = searchQuery
             };
 
             return View(model);
