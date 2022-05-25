@@ -6,7 +6,7 @@ namespace Forum.Data
     {
         Post GetById(int id);
         IEnumerable<Post> GetAll();
-        IEnumerable<Post> GetFiltredPosts(string serachQuery);
+        IEnumerable<Post> GetFiltredPosts(int id,string serachQuery);
         IEnumerable<Post> GetPostsByForum(int id);
 
         Task AddPost(Post post);

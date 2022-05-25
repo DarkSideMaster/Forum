@@ -40,7 +40,7 @@ body {
 
 
 .sectionHeader {
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(43, 42, 42,0.9);
     padding: 8px 0 24px 24px;
 }
 
@@ -202,7 +202,7 @@ body {
 
 
 .postHeader {
-    background-color: #212121;
+    background-color: rgba(43, 42, 42,0.9);
     padding: 8px 0px 24px 24px;
 }
 
@@ -212,12 +212,16 @@ body {
     font-family: 'Roboto Mono';
 }
 
-#formIndexTable td {
+#forumIndexTable td {
     background-color: rgba(255, 255, 255, 0.9);
 }
 
 #forumIndexTable tr:hover {
     background-color: rgba(0, 116, 238, 1);
+}
+
+.forumRegText {
+    text-align: center;
 }
 
 .forumData {
@@ -354,12 +358,37 @@ body {
     }
 
 
+
+.btn-forumSearch {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    font: inherit;
+    color: white;
+}
+
 #headingBtn {
     float: right;
-    margin-right:20px;
+    margin-right: 20px;
 }
 
 
+
+.searchBar {
+    padding: 3px 5px 2px 12px;
+    margin: 8px;
+    background-color: #1e1e1e;
+    width: 25%;
+    transition: ease .3s;
+    border: none;
+    color: white;
+}
+
+    .searchBar:focus {
+        color: black;
+        width: 60%;
+        background-color: white;
+    }
 
 .carousel-caption p {
     font-size: 20px;

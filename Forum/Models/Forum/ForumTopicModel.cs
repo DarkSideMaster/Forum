@@ -7,5 +7,6 @@ namespace Forum.Models
     {
         public ForumsListinigModel Forum { set; get; }
         public IEnumerable<PostListingModel> Posts { set; get; }
+        public string SearchQuery { set; get; }
     }
 }

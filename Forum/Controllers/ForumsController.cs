@@ -11,16 +11,17 @@ namespace Forum.Controllers
         private readonly IForums _forumService;
         private readonly IPosts _postService;
 
-        public ForumsController(IForums forumService) 
+        public ForumsController(IForums forumService, IPosts postService)
         {
             _forumService = forumService;
+            _postService = postService;
         }
 
         public IActionResult Index()
         {
 
-            var forums = _forumService.GetAll().Select(forum=>new ForumsListinigModel 
-            { 
+            var forums = _forumService.GetAll().Select(forum => new ForumsListinigModel
+            {
                 Id = forum.Id,
                 Name = forum.Title,
                 Description = forum.Description
@@ -35,11 +36,21 @@ namespace Forum.Controllers
         }
 
 
-        public IActionResult Topic(int Id) 
+        public IActionResult Topic(int id, string searchQuery)
         {
-            var forums = _forumService.GetbyId(Id);
-            var posts = forums.Posts;
+            var forums = _forumService.GetbyId(id);
 
+            var posts = new List<Post>();
+
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                 posts = _postService.GetFiltredPosts(id, searchQuery).ToList();
+            }
+            else
+            {
+                posts = forums.Posts;
+            }
+            
             var postListings = posts.Select(post => new PostListingModel
             {
                 Id = post.Id,
@@ -65,12 +76,12 @@ namespace Forum.Controllers
         private ForumsListinigModel BuildForumListing(Post post)
         {
             var forum = post.Forums;
-           return BuildForumListing(forum);
+            return BuildForumListing(forum);
         }
 
         private ForumsListinigModel BuildForumListing(Forums forum)
         {
-            
+
             return new ForumsListinigModel
             {
                 Id = forum.Id,
@@ -78,6 +89,12 @@ namespace Forum.Controllers
                 Description = forum.Description,
                 ImageUrl = forum.ImageUrl
             };
+        }
+
+        [HttpPost]
+        public IActionResult Search(int id, string searchQuery) 
+        {
+            return RedirectToAction("Topic", new { id, searchQuery });
         }
     }
 }

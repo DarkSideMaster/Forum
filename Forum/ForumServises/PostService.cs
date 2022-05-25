@@ -53,9 +53,12 @@ namespace Forum.ForumServises
 
         }
 
-        public IEnumerable<Post> GetFiltredPosts(string serachQuery)
+        public IEnumerable<Post> GetFiltredPosts(int id, string serachQuery)
         {
-            throw new NotImplementedException();
+            var forum = _context.Forums.Find(id);
+
+            return string.IsNullOrEmpty(serachQuery) ? forum.Posts :
+                   forum.Posts.Where(post => post.Title.Contains(serachQuery) || post.Content.Contains(serachQuery));       
         }
 
         public IEnumerable<Post> GetLastestPost(int n)

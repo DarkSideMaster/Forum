@@ -1,47 +1,110 @@
 ﻿@model Forum.Models.ForumTopicModel
 
-<h1>Ласкаво просимо на форум присвячений язику програмування @Model.Forum.Name </h1>
-
-<span id="headingBtn">
-    <a asp-controller="Post" asp-action="CreatePost" asp-route-id="@Model.Forum.Id" class="btn btn-newPost">Додати повідомлення</a>
-</span>
-@if (Model.Posts.Any())
-{
-    <table class="table table-bordered table-hover">
-        <tbody>
-            @foreach (var post in Model.Posts)
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">
+            <span>@Model.Forum.Name</span>
+            @if (Context.User.Identity.IsAuthenticated)
             {
-                <tr>
-                    <td>
-                        <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">
-                            @post.Title
-                        </a>
-                    </td>
-                    <td>
-                        @post.Author
-                    </td>
-                    <td>
-                        @post.DatePosted
-                    </td>
-                    <td>
-                        @post.RepliesCount
-                    </td>
-                </tr>
+                <span id="headingBtn">
+                    <a asp-controller="Post" asp-action="CreatePost" asp-route-id="@Model.Forum.Id" class="btn btn-newPost">Додати повідомлення</a>
+                </span>
             }
-        </tbody>
-    </table>
-}
-else
-{
-    <div class="noPosts">
-        <h3>
-            Схоже, в цій темі @Model.Forum.Name  ще нема відповідей.
-            <br />
-            Ви можете
-            <a asp-controller="Post" asp-action="CreatePost" asp-route-id="@Model.Forum.Id">
-                <span>почати діскусію саме зараз!</span>
-            </a>
-        </h3>
+            <form asp-controller="Forums" asp-action="Search" method="post">
+                <div class="serachForum">
+                    <input asp-for="SearchQuery" type="text" placeholder="Пошук..." class="searchBar" onfocus="clearThis(this)">
+                    <button type="submit" class="btn btn-forumSearch">
+                        <span class="material-icons">search</span>
+                    </button>
+                </div>
+                <input asp-for="Forum.Id" name="id" type="hidden">
+            </form>
+        </div>
+        <div class="sectionDescription">
+            <div class="forumLogo" style="background-image:url(@Model.Forum.ImageUrl)"></div>
+            <p class="forumRegText">Ласкаво просимо на @Model.Forum.Name форум. Будь-ласка, будьте ввічлими при спілкуванні.</p>
+            @if (!@User.Identity.IsAuthenticated)
+            {
+                <p class="forumRegText">
+                    <span>
+                        Ви повинні бути
+                        <a asp-area="Identity" asp-page="/Account/Register">зареєстровані</a>, щоб спілкуватися на форумі.
+                    </span>
+                </p>
+                <p class="forumRegText">
+                    Якщо ви вже зареєстрований користувач, будь-ласка здійсніть
+                    <span>
+                        <a asp-area="Identity" asp-page="/Account/Login">вхід</a>
+                    </span>
+                    до свого облікового запису.
+                </p>
+            }
+        </div>
     </div>
+    <div class="row forumIndexContent">
+        @if (Model.Posts.Any())
+        {
+            <table class="table table-hover table-bordered" id="forumIndexTable">
+                <tbody>
+                    @foreach (var post in Model.Posts)
+                    {
+                        <tr>
+                            <td>
+                                <div class="postData">
+                                    <div class="postTitle">
+                                        <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a>
+                                    </div>
+                                    <div class="forumSubTitle">
+                                        <div>
+                                            <span class="postAuthor">
+                                                <a asp-controller="Post" asp-action="Index" asp-route-id="@post.AuthorId">
+                                                    @post.Author
+                                                </a>
+                                            </span>
+                                            (@post.AuthorRating)
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="forumPostCount">
+                                    Віповідей: @post.RepliesCount
+                                </div>
+                            </td>
+                            <td>
+                                <div class="postDate">
+                                    @post.DatePosted
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="noPost">
+                <i class="material-icons md-72">відповідь</i>
+                <h3>
+                    Схоже, тут ще немає відповідей.
+                    Почніть обговорення прямо
+                    <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">
+                        <span>зараз!</span>
+                    </a>
+                </h3>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+    <script>
+        function clearThis(target) {
+            target.value = "";
+        }
+    </script>
 
 }
