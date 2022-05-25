@@ -58,7 +58,7 @@ namespace Forum.ForumServises
             var forum = _context.Forums.Find(id);
 
             return string.IsNullOrEmpty(serachQuery) ? forum.Posts :
-                   forum.Posts.Where(post => post.Title.Contains(serachQuery) || post.Content.Contains(serachQuery));       
+                   forum.Posts.Where(post => post.Title.Contains(serachQuery, StringComparison.OrdinalIgnoreCase) || post.Content.Contains(serachQuery, StringComparison.OrdinalIgnoreCase));       
         }
 
         public IEnumerable<Post> GetLastestPost(int n)
