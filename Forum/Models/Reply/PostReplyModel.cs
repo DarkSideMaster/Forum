@@ -11,6 +11,7 @@
         public string AuthorImageUrl { set; get; }
         public string ReplayContent { set; get; }
 
+        public bool IsAuthorAdmin { set; get; }
         public int PostId { set; get; }
     }
 }

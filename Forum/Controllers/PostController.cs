@@ -38,10 +38,16 @@ namespace Forum.Controllers
                 PostContent = post.Content,
                 Replies = replies,
                 ForumId = post.Forums.Id,
-                ForumName = post.Forums.Title
+                ForumName = post.Forums.Title,
+                IsAuthorAdmin = IsAuthorAdmin(post.User)
             };
 
             return View(model);
+        }
+
+        private bool IsAuthorAdmin(ApplicationUser user)
+        {         
+            return _userManager.GetRolesAsync(user).Result.Contains("Admin");   
         }
 
         //id it is Forum.Id
@@ -99,8 +105,9 @@ namespace Forum.Controllers
                 AuthorImageUrl = reply.User.ProfileImageUrl,
                 AuthorRating = reply.User.Rating,
                 Created = reply.Created,
-                ReplayContent = reply.Content
-            });
+                ReplayContent = reply.Content,
+                IsAuthorAdmin = IsAuthorAdmin(reply.User)
+            }) ;
         }
     }
 }

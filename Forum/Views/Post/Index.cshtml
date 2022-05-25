@@ -9,77 +9,75 @@
             <span id="headingBtn"><a asp-controller="Forums" asp-action="Topic" asp-route-id="@Model.ForumId" class="btn btn-back">Повернутися до @Model.ForumName</a></span>
         </div>
     </div>
-</div>
+    <div class="row" id="postIndexContent">
+        <div class="col-md-3 postAuthorContainer">
+            <div class="postAuthorImage" style="background-image:url(@Model.AuthorImageUrl)"></div>
+            <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId"></a>
+            @Model.AuthorName
+            <br />
+            <span class="postData">@Model.Created</span>
+        </div>
 
-
-<div class="row" id="" postIndexContent>
-    <div class="col-md-3 postAuthorContainer">
-        <div class="postAuthorImage" style="background-image:url(@Model.AuthorImageUrl)"></div>
-        <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId"></a>
-        @Model.AuthorName
-    </div>
-    <span class="postData">@Model.Created</span>
-    @if (Model.IsAdmin)
-    {
-        <span class="isAdmin smaller">
-            Адміністратор
-        </span>
-    }
-    <div class="col-md-9 postContentContainer">
-        <div class="postContent">
-            @Html.Raw(Model.PostContent)
+        @if (Model.IsAuthorAdmin)
+        {
+            <span class="isAdmin smaller">
+                Адміністратор
+            </span>
+        }
+        <div class="col-md-9 postContentContainer">
+            <div class="postContent">
+                @Html.Raw(Model.PostContent)
+            </div>
         </div>
     </div>
-</div>
 
-<div class=" row" id="replyDivider"></div>
+    <div class=" row" id="replyDivider"></div>
 
-@if (User.Identity.IsAuthenticated)
-{
-    <div class="row">
-        <span>
-            <a asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">
-                Відповісти
-            </a>
-        </span>
-    </div>
-}
-
-@if (@Model.Replies.Any())
-{
-    @foreach (var reply in @Model.Replies)
+    @if (User.Identity.IsAuthenticated)
     {
-
-        <div сlass="row replyContent">
-            <div class="col-md-3 replyAuthorContainer">
-                <div class="postAuthorImage" style="background-image: url(@reply.AuthorImageUrl)"></div>
-                <a asp-controller="Profile" asp-action="Detail" asp-route-id="@reply.AuthorId">
-                    @reply.AuthorName
+        <div class="row">
+            <span>
+                <a asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">
+                    Відповісти
                 </a>
-                @if (@reply.IsAuthorAdmin)
-                {
-                    <div class="isAdmin smaller">Адміністратор</div>
-                }
+            </span>
+        </div>
+    }
 
-                <span>@reply.Created</span>
-            </div>
-            <div class="col-md-9 replyContentContainer">
-                <div class="postContent">
-                    @Html.Raw(reply.ReplayContent)
+    @if (@Model.Replies.Any())
+    {
+        @foreach (var reply in @Model.Replies)
+        {
+
+            <div сlass="row replyContent">
+                <div class="col-md-3 replyAuthorContainer">
+                    <div class="postAuthorImage" style="background-image: url(@reply.AuthorImageUrl)"></div>
+                    <a asp-controller="Profile" asp-action="Detail" asp-route-id="@reply.AuthorId">
+                        @reply.AuthorName
+                    </a>
+                    @if (@reply.IsAuthorAdmin)
+                    {
+                        <div class="isAdmin smaller">Адміністратор</div>
+                        <br />
+                    }
+
+                    <span>@reply.Created.ToShortDateString()</span>
+                </div>
+                <div class="col-md-9 replyContentContainer">
+                    <div class="postContent">
+                        @Html.Raw(reply.ReplayContent)
+                    </div>
                 </div>
             </div>
+        }
+    }
+    else
+    {
+        <div class="noPost">
+            <h3>
+                Немає відповідей<br />
+            </h3>
         </div>
     }
-}
-else
-{
-    <div class="noPost">
-        <h3>
-            Немає відповідей<br/>
-        </h3>
-    </div>
-}
-
-
-
+</div>
 

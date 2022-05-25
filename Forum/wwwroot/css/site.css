@@ -168,6 +168,50 @@ body {
     background-color: #ddd;
 }
 
+
+.postAuthorImage {
+    height: 80px;
+    width: 80px;
+    background-size: 100%;
+}
+
+.postAuthorContainer {
+    padding: 12px;
+    color: #444;
+    font-family: 'Roboto';
+    width: 190px;
+}
+
+.postIndexTitle {
+    font-size: 1.4em;
+    color: white;
+}
+
+#postIndexContent {
+    background-color: white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 6px 6px rgba(0,0,0,0.3);
+}
+
+
+.postContentContainer {
+    font-family: 'Roboto';
+    color: #222;
+    padding: 22px;
+    border-left: 1px, solid #ddd;
+}
+
+
+.postHeader {
+    background-color: #212121;
+    padding: 8px 0px 24px 24px;
+}
+
+.postAuthorRating {
+    font-size: 0.9em;
+    color: #159;
+    font-family: 'Roboto Mono';
+}
+
 #formIndexTable td {
     background-color: rgba(255, 255, 255, 0.9);
 }
@@ -205,7 +249,7 @@ body {
     width: 40px;
     background-color: #ddd;
     border: 1px solid #555;
-    background-size:100%;
+    background-size: 100%;
 }
 
 .forumPostCount {
@@ -225,7 +269,7 @@ body {
     background-color: white;
 }
 
-.noPosts {
+.noPost {
     text-align: center;
     padding-top: 30px;
     font-family: 'Roboto Mono'
@@ -239,7 +283,83 @@ body {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 15px;
 }
+
+.btn-back {
+    background-color: #555;
+    color: #fff !important;
+    transition: ease-in 0.1s;
+    border-radius: 0px !important;
+}
+
+    .btn-back:hover {
+        background-color: #1E88E5 !important;
+        transition: ease-in 0.1s;
+    }
+
+.btn-newReply {
+    background-color: #5C6BC0 !important;
+    color: #fff !important;
+    transition: ease-in 0.1s;
+    border-radius: 0px !important;
+}
+
+    .btn-newReply:hover {
+        background-color: #9FA8DA !important;
+        transition: ease-in 0.1s;
+    }
+
+
+.btn-file {
+    background-color: #4FC3F7;
+    color: white;
+    transition: ease-in 0.3s;
+    width: 100%;
+}
+
+
+    .btn-file:hover {
+        background-color: #039BE5;
+        transition: ease-in 0.3s;
+    }
+
+.btn-newPost {
+    background-color: #c62828 !important;
+    color: #fff !important;
+    transition: ease-in 0.1s;
+    border-radius: 0px !important
+}
+
+
+    .btn-newPost:hover {
+        background-color: #e53935 !important;
+        transition: ease-in 0.1s;
+        color: #fff !important;
+    }
+
+
+.btn-submitPost {
+    background-color: #00695C !important;
+    color: #fff !important;
+    transition: ease-in 0.1s;
+    border-radius: 0px !important
+}
+
+
+    .btn-submitPost:hover {
+        background-color: #00897B !important;
+        transition: ease-in 0.1s;
+        color: #fff !important;
+    }
+
+
+#headingBtn {
+    float: right;
+    margin-right:20px;
+}
+
+
 
 .carousel-caption p {
     font-size: 20px;

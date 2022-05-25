@@ -2,10 +2,9 @@
 
 <h1>Ласкаво просимо на форум присвячений язику програмування @Model.Forum.Name </h1>
 
-<span id="headingButton">
+<span id="headingBtn">
     <a asp-controller="Post" asp-action="CreatePost" asp-route-id="@Model.Forum.Id" class="btn btn-newPost">Додати повідомлення</a>
 </span>
-
 @if (Model.Posts.Any())
 {
     <table class="table table-bordered table-hover">
