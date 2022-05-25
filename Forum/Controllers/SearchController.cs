@@ -12,7 +12,7 @@ namespace Forum.Controllers
 
         private readonly IPosts _postService;
 
-        protected SearchController(IPosts postService)
+        public SearchController(IPosts postService)
         {
             _postService = postService;
         }
