@@ -61,6 +61,11 @@ namespace Forum.ForumServises
                    forum.Posts.Where(post => post.Title.Contains(serachQuery, StringComparison.OrdinalIgnoreCase) || post.Content.Contains(serachQuery, StringComparison.OrdinalIgnoreCase));       
         }
 
+        public IEnumerable<Post> GetFiltredPosts(string serachQuery)
+        {
+           return GetAll().Where(post => post.Title.Contains(serachQuery, StringComparison.OrdinalIgnoreCase) || post.Content.Contains(serachQuery, StringComparison.OrdinalIgnoreCase));
+        }
+
         public IEnumerable<Post> GetLastestPost(int n)
         {
             return GetAll().OrderByDescending(post => post.Created).Take(n);

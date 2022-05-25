@@ -1,0 +1,86 @@
+﻿@model Forum.Models.Search.SearchResultModel
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">
+            <span>Результат пошуку: @Model.SearchQuery</span>
+            <form asp-controller="Search" asp-action="Search" method="post">
+                <div class="serachForum">
+                    <input asp-for="SearchQuery" type="text" placeholder="Пошук..." class="searchBar" onfocus="clearThis(this)">
+                    <button type="submit" class="btn btn-forumSearch">
+                        <span class="material-icons">search</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row forumIndexContent">
+        @if (!Model.EmptySearchResult)
+        {
+            <table class="table table-hover table-bordered" id="searchIndexTable">
+                <tbody>
+                    @foreach (var post in Model.Posts)
+                    {
+                        <tr>
+                            <td>
+
+                                <div class="forumLogo" style="background-image:url(@post.Forum.ImageUrl)"></div>
+                                <div class="postData">
+                                    <div class="postTitle">
+                                        <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a>
+                                    </div>
+                                    <div class="forumSubTitle">
+                                        <div>
+                                            написав
+                                            <span class="postAuthor">
+                                                <a asp-controller="Post" asp-action="Index" asp-route-id="@post.AuthorId">
+                                                    @post.Author
+                                                </a>
+                                            </span>
+                                            (@post.AuthorRating)
+                                            у:
+                                            <span class="postForum">
+                                                <a asp-controller="Forums" asp-action="Topic" asp-route-id="@post.Forum.Id">@post.Forum.Name</a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="forumPostCount">
+                                    Віповідей: @post.RepliesCount
+                                </div>
+                            </td>
+                            <td>
+                                <div class="postDate">
+                                    @post.DatePosted
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="noPost">
+                <i class="material-icons md-72">відповідь</i>
+                <h3>
+                    Не знайдено жодного результату за запитом @Model.SearchQuery. <br />
+                </h3>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+    <script>
+        function clearThis(target) {
+            target.value = "";
+        }
+    </script>
+
+}
