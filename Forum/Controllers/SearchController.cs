@@ -42,6 +42,8 @@ namespace Forum.Controllers
                 SearchQuery = searchQuery,
                 EmptySearchResult = isNoResults
             };
+
+            return View(model); 
         }
 
         private ForumsListinigModel BuildForumListing(Post post)
