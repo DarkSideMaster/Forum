@@ -1,0 +1,18 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model Forum.Models.User.ProfileModel
+
+@inject UserManager<ApplicationUser> UserManager
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">
+            Профіль корустувача
+        </div>
+        @if (User.IsInRole("Admin"))
+        {
+          //here moderator role or administrator or button
+        }
+
+
+    </div>
+</div>
