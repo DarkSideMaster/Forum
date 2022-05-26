@@ -20,6 +20,10 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
 
 builder.Services.AddScoped<IForums, ForumService>();
 builder.Services.AddScoped<IPosts, PostService>();
+builder.Services.AddTransient<DataSeeder>();
+
+
+builder.Services.Configure(DataSeeder dataseder);
 
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();

@@ -10,9 +10,32 @@
         </div>
         @if (User.IsInRole("Admin"))
         {
-          //here moderator role or administrator or button
+            //here moderator role or administrator or button
         }
-
-
+        <div class="user userProfile "></div>
+        <div class="col-md-4">
+            <div class="userProfileImage" style="background-image:url(@Model.ProfileImageUrl)"></div>
+            @if (User.Identity.Name == Model.UserName)
+            {
+                <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage">
+                    <div id="upload">
+                        <label class="btn btn-default btn-file">
+                            Огляд <input type="file" style="display:none" />
+                        </label>
+                    </div>
+                    <button type="submit" id="btn-profile" class="btn btn-default">Підтвердити</button>
+                </form>
+            }
+        </div>
+    </div>
+    <div class="col-md-8">
+        <span id="userName"> @Model.UserName</span>
+        @if (@Model.IsAdmin)
+        {
+            <span class="isAdmin">Адмінстратор</span>
+        }
+        <span id="userRating">Поточний рейтинг: @Model.UserRating</span>
+        <span id="userEmailLabel">E-mail: @Model.Email</span>
+        <span id="userCreateLabel">Приєднався: @Model.MemberSince</span>
     </div>
 </div>

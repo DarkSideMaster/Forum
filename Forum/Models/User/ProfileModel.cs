@@ -9,6 +9,7 @@
         public string UserRating { set; get; }
         public string ProfileImageUrl { set; get; }
         public DateTime MemberSince { set; get; }
+        public bool IsAdmin { set; get; }
         public IFormFile ImageUpload { set; get; }
 
     }
