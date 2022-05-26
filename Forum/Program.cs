@@ -4,6 +4,7 @@ using Forum.Models;
 using Forum.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,17 +21,11 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
 
 builder.Services.AddScoped<IForums, ForumService>();
 builder.Services.AddScoped<IPosts, PostService>();
-builder.Services.AddTransient<DataSeeder>();
-
-builder.Services.Configure<DataSeeder>(options =>
-{
-    options.SeedSuperUser();
-});
+builder.Services.AddScoped<DataSeeder>();
 
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();
 var app = builder.Build();
-
 
 
 
@@ -47,7 +42,21 @@ else
 }
 
 app.UseHttpsRedirection();
+
+//Добаляем пользователя администратора, если его нет в базе данных
+SeedDatabase(); 
+
 app.UseStaticFiles();
+
+
+void SeedDatabase() 
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dataSeeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
+        dataSeeder.SeedSuperUser();
+    }
+}
 
 app.UseRouting();
 

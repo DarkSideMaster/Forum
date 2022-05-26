@@ -13,14 +13,14 @@ namespace Forum.Data
             _context = context;
         }
 
-        public  Task SeedSuperUser() 
+        public void SeedSuperUser()
         {
             var roleStore = new RoleStore<IdentityRole>(_context);
             var userStore = new UserStore<ApplicationUser>(_context);
 
             var user = new ApplicationUser
             {
-                UserName ="ForumAdmin",
+                UserName = "ForumAdmin",
                 NormalizedUserName = "forumadmin",
                 Email = "darkpanter@ukr.net",
                 NormalizedEmail = "darkpanter@ukr.net",
@@ -32,30 +32,28 @@ namespace Forum.Data
 
             var hasher = new PasswordHasher<ApplicationUser>();
             var hasshePassword = hasher.HashPassword(user, "admin");
-
             user.PasswordHash = hasshePassword;
 
-            var hasAmdinRole = _context.Roles.Any(r => r.Name == "Admin");
+            var hasAmdinRole = _context.Roles.Any(roles => roles.Name == "Admin");
 
             if (!hasAmdinRole)
             {
-                roleStore.CreateAsync(new IdentityRole 
-               { Name = "Admin", 
-                NormalizedName = "admin" 
-               });
+                roleStore.CreateAsync(new IdentityRole
+                {
+                    Name = "Admin",
+                    NormalizedName = "Admin"
+                });
             }
 
             var hasSuperUser = _context.Users.Any(u => u.NormalizedUserName == user.UserName);
-          
-            if (hasSuperUser)
+
+            if (!hasSuperUser)
             {
-                 userStore.CreateAsync(user);
-                 userStore.AddToRoleAsync(user, "Admin");
+                userStore.CreateAsync(user);
+                userStore.AddToRoleAsync(user, "Admin");
             }
 
-             _context.SaveChangesAsync();
-
-            return Task.CompletedTask;
+            _context.SaveChanges();
         }
     }
 }
