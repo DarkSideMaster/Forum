@@ -13,7 +13,7 @@ namespace Forum.Data
             _context = context;
         }
 
-        public async Task SeedSuperUser() 
+        public  Task SeedSuperUser() 
         {
             var roleStore = new RoleStore<IdentityRole>(_context);
             var userStore = new UserStore<ApplicationUser>(_context);
@@ -39,7 +39,7 @@ namespace Forum.Data
 
             if (!hasAmdinRole)
             {
-               await roleStore.CreateAsync(new IdentityRole 
+                roleStore.CreateAsync(new IdentityRole 
                { Name = "Admin", 
                 NormalizedName = "admin" 
                });
@@ -49,11 +49,13 @@ namespace Forum.Data
           
             if (hasSuperUser)
             {
-                await userStore.CreateAsync(user);
-                await userStore.AddToRoleAsync(user, "Admin");
+                 userStore.CreateAsync(user);
+                 userStore.AddToRoleAsync(user, "Admin");
             }
 
-            await _context.SaveChangesAsync();
+             _context.SaveChangesAsync();
+
+            return Task.CompletedTask;
         }
     }
 }

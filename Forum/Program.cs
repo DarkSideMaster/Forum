@@ -22,12 +22,17 @@ builder.Services.AddScoped<IForums, ForumService>();
 builder.Services.AddScoped<IPosts, PostService>();
 builder.Services.AddTransient<DataSeeder>();
 
-
-builder.Services.Configure(DataSeeder dataseder);
+builder.Services.Configure<DataSeeder>(options =>
+{
+    options.SeedSuperUser();
+});
 
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();
 var app = builder.Build();
+
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
