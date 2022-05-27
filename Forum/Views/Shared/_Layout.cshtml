@@ -27,12 +27,14 @@
                         <a class="nav-link" asp-controller="Forums" asp-action="Index">Форуми</a>
                     </li>
                 </ul>
+                &nbsp;
+                &nbsp;
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a href="#" class="dropdown-toggle dropDownMainPage" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             Налаштування
-                        </button>
+                        </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdown">
                             <li class="dropdown-divider"></li>
                             <li class="dropdown-header">Профіль</li>

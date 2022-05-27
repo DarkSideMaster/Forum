@@ -128,14 +128,20 @@ body {
     transition: ease-in 0.2s;
 }
 
-    .homeSearch:focus {
-        border: none !important;
-        outline: none !important;
-        transition: ease-in 0.2s;
-        color: #03A9F4;
-        background-color: rgba(0,0,0, 0.7);
-        box-shadow: 0 5px 4px -6px #000;
-    }
+.dropDownMainPage {
+    color: rgba(255,255,255,.55) !important;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.homeSearch:focus {
+    border: none !important;
+    outline: none !important;
+    transition: ease-in 0.2s;
+    color: #03A9F4;
+    background-color: rgba(0,0,0, 0.7);
+    box-shadow: 0 5px 4px -6px #000;
+}
 
 .navbarLogo {
     background-image: url("../images/forum/logo1.png");
