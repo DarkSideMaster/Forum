@@ -1,6 +1,10 @@
-﻿namespace Forum.ForumServises
+﻿using Forum.Data.Interfaces;
+
+namespace Forum.ForumServises
 {
-    public class UploadService
+    public class UploadService :IUpload
     {
+
+
     }
 }

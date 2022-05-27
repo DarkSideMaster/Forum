@@ -1,4 +1,5 @@
 using Forum.Data;
+using Forum.Data.Interfaces;
 using Forum.ForumServises;
 using Forum.Models;
 using Forum.Services;
@@ -21,6 +22,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
 
 builder.Services.AddScoped<IForums, ForumService>();
 builder.Services.AddScoped<IPosts, PostService>();
+builder.Services.AddScoped<IUpload, UploadService>();
+builder.Services.AddScoped<IApplicationUser, ApplicationUserService>();
+
 builder.Services.AddTransient<DataSeeder>();
 
 builder.Services.AddMvc();

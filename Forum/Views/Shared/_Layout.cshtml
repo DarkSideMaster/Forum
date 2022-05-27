@@ -12,38 +12,42 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Forum.styles.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark main-nav">
             <div class="container justify-content-center">
                 <div class="navbar-header">
-                    <a class="navbar-brand navbarLogo" asp-controller="Forums" asp-action="Index"></a>
+                    <a class="navbar-brand navbarLogo" asp-controller="Home" asp-action="Index"></a>
                 </div>
-                <ul class="nav navbar-nav flex-fill w-100 flex-nowrap">
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                Налаштування
-                                <span class="caret"></span>
-                            </a>
-                            <ul>
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Профіль</li>
-                                <li><a asp-controller="Profile" asp-action="Detail">Мій профіль</a></li>
-                                @if (User.IsInRole("Admin"))
-                                {
-                                    <li role="separator" class="divider"></li>
-                                    <li class="dropdown-header">Адмінстратор</li>
-                                    <li><a asp-controller="Forums" asp-action="Create">Створити форум</a></li>
-                                    <li><a asp-controller="Profile" asp-action="Index">Користувачі</a></li>
-                                }
-                            </ul>
-                        </li>
-                    }
+                &nbsp;
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Forums" asp-action="Index">Форуми</a>
+                    </li>
                 </ul>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Налаштування
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown">
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-header">Профіль</li>
+                            <li><a class="dropdown-item" asp-controller="Profile" asp-action="Detail" asp-route-id="@UserManager.GetUserId(User)">Мій профіль</a></li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="dropdown-divider"></li>
+                                <li class="dropdown-header">Панель адміністратора</li>
+                                <li><a class="dropdown-item" asp-controller="Forums" asp-action="Create">Створити форум</a></li>
+                                <li><a class="dropdown-item" asp-controller="Profile" asp-action="Index">Користувачі</a></li>
+                            }
+                        </ul>
+                    </div>
+                }
+
                 @if (!SignInManager.IsSignedIn(User))
                 {
                     <ul class="nav navbar-nav flex-fill w-100 justify-content-end">
@@ -58,10 +62,10 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <ul class="nav navbar-nav flex-fill w-100 justify-content-end">
-                        <li class="nav-item" style="margin-top:1.5%">
-                            <span class="nav-link">
+                        <li class="nav-item" style="margin-top:0.9%">
+                            <a class="nav-link">
                                 Вітаємо, @UserManager.GetUserName(User)
-                            </span>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <form class="nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
@@ -71,25 +75,18 @@
                     </ul>
                 }
 
-                @*<ul class="nav navbar-nav flex-fill justify-content-center">
-                <li class="nav-item"><a class="nav-link" href="#">Center</a></li>
-                </ul>
-                <ul class="nav navbar-nav flex-fill w-100 justify-content-end">
-                <li class="nav-item">
-                <a class="nav-link" href="#">Help</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-                </li>
-                </ul>*@
             </div>
         </nav>
     </header>
+
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

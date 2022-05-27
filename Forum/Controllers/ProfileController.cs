@@ -34,10 +34,7 @@ namespace Forum.Controllers
                 ProfileImageUrl = user.ProfileImageUrl,
                 MemberSince = user.MemderSince,
                 IsAdmin = userRoles.Contains("Admin")
-
             };
-
-
             return View(model);
         }
     }
