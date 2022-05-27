@@ -42,19 +42,18 @@ namespace Forum.Data
                 {
                     Name = "Admin",
                     NormalizedName = "admin"
-                });
-                _context.SaveChangesAsync();
+                }).Wait();
             }
          
             var hasSuperUser = _context.Users.Any(u => u.NormalizedUserName == user.UserName);
 
             if (!hasSuperUser)
             {
-                userStore.CreateAsync(user);
-                userStore.AddToRoleAsync(user, "Admin");
-                _context.SaveChangesAsync();
+                userStore.CreateAsync(user).Wait();
+                userStore.AddToRoleAsync(user, "Admin").Wait();               
             }
-            
+
+            _context.SaveChangesAsync();
             return Task.CompletedTask;
         }
     }
