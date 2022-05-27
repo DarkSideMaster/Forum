@@ -21,7 +21,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
 
 builder.Services.AddScoped<IForums, ForumService>();
 builder.Services.AddScoped<IPosts, PostService>();
-builder.Services.AddScoped<DataSeeder>();
+builder.Services.AddTransient<DataSeeder>();
 
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();
@@ -51,11 +51,14 @@ app.UseStaticFiles();
 
 void SeedDatabase() 
 {
-    using (var scope = app.Services.CreateScope())
+    var task = Task.Run(() =>
     {
-        var dataSeeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
-        dataSeeder.SeedSuperUser();
-    }
+        using (var scope = app.Services.CreateScope())
+        {
+            var dataSeeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
+            dataSeeder.SeedSuperUser();
+        }
+    });
 }
 
 app.UseRouting();
