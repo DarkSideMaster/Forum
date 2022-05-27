@@ -9,6 +9,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//builder.WebHost.ConfigureAppConfiguration((builderContext, config) => {
+//    IWebHostEnvironment env = builderContext.HostingEnvironment;
+//    config.AddJsonFile("storageAzureSettings.json", optional: false, reloadOnChange: true)
+//});
+
+
+builder.Configuration.AddJsonFile(
+     "storageAzureSettings.json",
+     optional: false,
+     reloadOnChange: true);
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("ForumDBConnection") ?? throw new InvalidOperationException("Connection string 'ForumDBConnection' not found."); ;
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -26,6 +37,7 @@ builder.Services.AddScoped<IUpload, UploadService>();
 builder.Services.AddScoped<IApplicationUser, ApplicationUserService>();
 
 builder.Services.AddTransient<DataSeeder>();
+
 
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();

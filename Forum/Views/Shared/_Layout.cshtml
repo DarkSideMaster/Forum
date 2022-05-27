@@ -64,9 +64,9 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <ul class="nav navbar-nav flex-fill w-100 justify-content-end">
-                        <li class="nav-item" style="margin-top:0.9%">
-                            <a class="nav-link">
-                                Вітаємо, @UserManager.GetUserName(User)
+                        <li class="nav-item" style="margin-top:1.7%">
+                            <a class="nav-link" style="float: left;padding: 0px 0px !important;">
+                                Вітаємо, &nbsp; <a class="dropDownMainPage" asp-controller="Profile" asp-action="Detail" asp-route-id="@UserManager.GetUserId(User)">@UserManager.GetUserName(User)</a>
                             </a>
                         </li>
                         <li class="nav-item">
