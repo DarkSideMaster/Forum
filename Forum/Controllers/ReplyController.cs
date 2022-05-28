@@ -1,4 +1,5 @@
 ﻿using Forum.Data;
+using Forum.Data.Interfaces;
 using Forum.Models;
 using Forum.Models.Reply;
 using Microsoft.AspNetCore.Identity;
@@ -10,11 +11,12 @@ namespace Forum.Controllers
     {
         private readonly IPosts _postService;
         private readonly UserManager<ApplicationUser> _userManager;
-
-        public ReplyController(IPosts postService, UserManager<ApplicationUser> userManager)
+        private readonly IApplicationUser _userService;
+        public ReplyController(IPosts postService, UserManager<ApplicationUser> userManager, IApplicationUser userService)
         {
             _postService = postService;
             _userManager = userManager;
+            _userService = userService;
         }
 
 
@@ -52,6 +54,8 @@ namespace Forum.Controllers
             var reply = BuildReply(model, user);
 
             await _postService.AddReply(reply);
+
+            await _userService.UpdateUserRating(userId, typeof(PostReply));
 
             return RedirectToAction("Index", "Post", new { id = model.PostId });
         }

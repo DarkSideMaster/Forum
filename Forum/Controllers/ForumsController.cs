@@ -1,9 +1,11 @@
 ﻿using Forum.Data;
+using Forum.Data.Interfaces;
 using Forum.Models;
 using Forum.Models.Forum;
 using Forum.Models.Posts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.WindowsAzure.Storage.Blob;
+using System.Net.Http.Headers;
 
 namespace Forum.Controllers
 {
@@ -11,11 +13,15 @@ namespace Forum.Controllers
     {
         private readonly IForums _forumService;
         private readonly IPosts _postService;
+        private readonly IUpload _uploadService;
+        private readonly IConfiguration _configuration;
 
-        public ForumsController(IForums forumService, IPosts postService)
+        public ForumsController(IForums forumService, IPosts postService, IUpload uploadService, IConfiguration configuration)
         {
             _forumService = forumService;
             _postService = postService;
+            _uploadService = uploadService;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -124,13 +130,43 @@ namespace Forum.Controllers
                 var blockBlob = UploadForumImage(model.ImageUpload);
                 imageUrl = blockBlob.Uri.AbsoluteUri;
             }
+
+            var forum = new Forums
+            {
+                Title = model.Title,
+                Description = model.Description,
+                Created = DateTime.Now,
+                ImageUrl = imageUrl
+            };
+
+            await _forumService.Create(forum);
+
+            return RedirectToAction("Index", "Forum");
         }
 
-        private CloudBlockBlob UploadForumImage(IFormFile imageUpload)
+
+        //Upload to the Azure Clouds
+        private CloudBlockBlob UploadForumImage(IFormFile file)
         {
-            
+            //Connect Azure Storage Account Container
+            var connectionString = _configuration.GetConnectionString("AzureStorageAccount");
 
+            //Get Blob Container
+            var container = _uploadService.GetBlobContainer(connectionString);
 
+            //Parse the Content Disposition response header
+            var contentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+
+            //Grab the filename
+            var filename = contentDisposition.FileName.Trim('"');
+
+            //Get a reference to Block Blob
+            var blockBlob = container.GetBlockBlobReference(filename);
+
+            //On taht block blob, upload our file <-- file uploaded to the cloud
+             blockBlob.UploadFromStreamAsync(file.OpenReadStream());
+
+            return blockBlob;
         }
     }
 }

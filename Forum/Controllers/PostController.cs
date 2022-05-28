@@ -1,4 +1,5 @@
 ﻿using Forum.Data;
+using Forum.Data.Interfaces;
 using Forum.Models;
 using Forum.Models.Posts;
 using Forum.Models.Reply;
@@ -12,12 +13,14 @@ namespace Forum.Controllers
         private readonly IPosts _postService;
         private readonly IForums _forumService;
         private static UserManager<ApplicationUser> _userManager;
+        private readonly IApplicationUser _userService;
 
-        public PostController(IPosts postService, IForums forumService, UserManager<ApplicationUser> userManager)
+        public PostController(IPosts postService, IForums forumService, UserManager<ApplicationUser> userManager, IApplicationUser userService)
         {
             _postService = postService;
             _forumService = forumService;
             _userManager = userManager;
+            _userService = userService;
         }
 
         public IActionResult Index( int id)
@@ -75,7 +78,7 @@ namespace Forum.Controllers
 
             _postService.AddPost(post).Wait();
 
-            //TODO User rating
+            await _userService.UpdateUserRating(userId, typeof(Post));
 
             return RedirectToAction("Index", "Post", new { id = post.Id });
         }
