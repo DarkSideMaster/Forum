@@ -105,7 +105,7 @@ namespace Forum.Controllers
                 AuthorImageUrl = reply.User.ProfileImageUrl,
                 AuthorRating = reply.User.Rating,
                 Created = reply.Created,
-                ReplayContent = reply.Content,
+                ReplyContent = reply.Content,
                 IsAuthorAdmin = IsAuthorAdmin(reply.User)
             }) ;
         }

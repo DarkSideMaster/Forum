@@ -20,9 +20,10 @@ namespace Forum.ForumServises
             await _context.SaveChangesAsync();
         }
 
-        public Task AddReplay(PostReply reply)
+        public async Task AddReply(PostReply reply)
         {
-            throw new NotImplementedException();
+            _context.PostReplys.Add(reply);
+            await _context.SaveChangesAsync();
         }
 
         public Task DeletePost(int post)

@@ -13,7 +13,7 @@ namespace Forum.Data
         Task AddPost(Post post);
         Task DeletePost(int post);
         Task EditPostContent(int id, string newcContent);
-        Task AddReplay(PostReply reply);
+        Task AddReply(PostReply reply);
         IEnumerable<Post> GetLastestPost(int id);
     }
 }

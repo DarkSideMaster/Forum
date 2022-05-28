@@ -195,6 +195,15 @@ body {
     width: 190px;
 }
 
+.replyAuthorContainer {
+    padding: 12px;
+    color: #444;
+    font-family: 'Roboto';
+    width: 190px;
+}
+
+
+
 .postIndexTitle {
     font-size: 1.4em;
     color: white;
@@ -206,6 +215,15 @@ body {
 }
 
 
+#postIndexContentBtn {
+    background-color: #ffffff9e;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 6px 6px rgba(0,0,0,0.3);
+}
+
+.isAdmin.smaller {
+    font-family: 'Roboto';
+    font-weight:bold;
+}
 .postContentContainer {
     font-family: 'Roboto';
     color: #222;
@@ -213,6 +231,10 @@ body {
     border-left: 1px, solid #ddd;
 }
 
+#replyDivider {
+    height: 2px;
+    background-color: #d5d5d5;
+}
 
 .postHeader {
     background-color: rgba(43, 42, 42,0.9);

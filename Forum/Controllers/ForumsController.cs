@@ -3,6 +3,7 @@ using Forum.Models;
 using Forum.Models.Forum;
 using Forum.Models.Posts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Forum.Controllers
 {
@@ -103,6 +104,33 @@ namespace Forum.Controllers
         public IActionResult Search(int id, string searchQuery) 
         {
             return RedirectToAction("Topic", new { id, searchQuery });
+        }
+
+        public IActionResult Create() 
+        {
+            var model = new AddForumModel();
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddForum(AddForumModel model) 
+        {
+            var imageUrl = "/images/Users/default.png"; ;
+
+            if (!string.IsNullOrEmpty(model.ImageUrl))
+            {
+                var blockBlob = UploadForumImage(model.ImageUpload);
+                imageUrl = blockBlob.Uri.AbsoluteUri;
+            }
+        }
+
+        private CloudBlockBlob UploadForumImage(IFormFile imageUpload)
+        {
+            
+
+
         }
     }
 }

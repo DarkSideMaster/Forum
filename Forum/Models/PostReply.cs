@@ -9,5 +9,6 @@
         public virtual ApplicationUser? User { get; set; }
         public virtual Forums? Forums { set; get; }
         public virtual List<PostReply>? Replies { set; get; }
+        public Post Post { get;  set; }
     }
 }
