@@ -125,7 +125,7 @@ namespace Forum.Controllers
         {
             var imageUrl = "/images/Users/defaultUser.png"; ;
 
-            if (!string.IsNullOrEmpty(model.ImageUrl))
+            if (string.IsNullOrEmpty(model.ImageUrl))
             {
                 var blockBlob = UploadForumImage(model.ImageUpload);
                 imageUrl = blockBlob.Uri.AbsoluteUri;
@@ -141,7 +141,7 @@ namespace Forum.Controllers
 
             await _forumService.Create(forum);
 
-            return RedirectToAction("Index", "Forum");
+            return RedirectToAction("Index", "Forums");
         }
 
 
@@ -152,7 +152,7 @@ namespace Forum.Controllers
             var connectionString = _configuration.GetConnectionString("AzureStorageAccount");
 
             //Get Blob Container
-            var container = _uploadService.GetBlobContainer(connectionString);
+            var container = _uploadService.GetBlobContainer(connectionString, "forum-images");
 
             //Parse the Content Disposition response header
             var contentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
@@ -164,7 +164,7 @@ namespace Forum.Controllers
             var blockBlob = container.GetBlockBlobReference(filename);
 
             //On taht block blob, upload our file <-- file uploaded to the cloud
-             blockBlob.UploadFromStreamAsync(file.OpenReadStream());
+             blockBlob.UploadFromStreamAsync(file.OpenReadStream()).Wait();
 
             return blockBlob;
         }
