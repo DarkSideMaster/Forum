@@ -15,14 +15,17 @@ namespace Forum.Services
 
         }
 
-        public Task Create(Forums forum)
+        public async Task Create(Forums forum)
         {
-            throw new NotImplementedException();
+            _context.Forums.Add(forum);
+            await _context.SaveChangesAsync();
         }
 
-        public Task Delete(int forumId)
+        public async Task Delete(int forumId)
         {
-            throw new NotImplementedException();
+            var forum = GetbyId(forumId);
+            _context.Remove(forum);
+            await _context.SaveChangesAsync();
         }
 
         public IEnumerable<Forums> GetAll()

@@ -123,7 +123,7 @@ namespace Forum.Controllers
         [HttpPost]
         public async Task<IActionResult> AddForum(AddForumModel model) 
         {
-            var imageUrl = "/images/Users/default.png"; ;
+            var imageUrl = "/images/Users/defaultUser.png"; ;
 
             if (!string.IsNullOrEmpty(model.ImageUrl))
             {
