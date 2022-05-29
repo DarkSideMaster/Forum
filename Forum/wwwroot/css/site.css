@@ -23,6 +23,19 @@ body {
     background-position: center;
 }
 
+
+#userIndexTable {
+    background-color: white;
+}
+
+.userProfilePic {
+    height: 140px;
+    width: 140px;
+    background-size: 100%;
+}
+
+
+
 .navbar {
     box-shadow: 0 5px 4px -6px #000;
 }
@@ -108,9 +121,10 @@ body {
 }
 
 .globalSearchIcon {
-    font-size:46px !important;
-    color:red;
+    font-size: 46px !important;
+    color: red;
 }
+
 .forumSearchIcon {
     font-size: 39px !important;
 }
@@ -216,15 +230,14 @@ body {
 
 
 #postIndexContentBtn {
-    background-color: #ffffff9e;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 6px 6px rgba(0,0,0,0.3);
+    background-color: #3f51b5;
 }
 
 .userNickName {
     text-decoration: none;
     font-weight: bold;
     font-family: 'Roboto Mono';
-    font-size:1em;
+    font-size: 1em;
 }
 
 .isAdmin.smaller {
@@ -254,6 +267,10 @@ body {
 }
 
 #replyDivider {
+    height: 2px;
+}
+
+#replyDividers {
     height: 2px;
     background-color: #d5d5d5;
 }
@@ -458,9 +475,12 @@ body {
     width: 200px;
     height: 200px;
     background-color: #ddd;
-    background-repeat:no-repeat;
+    background-size: 100%;
 }
 
+.fillSquare {
+    background-size: 100%;
+}
 
 #userEmailLabel, #userBioLabel, #userCreateLabel, #userRating, #userActiveLabel {
     display: block;
@@ -470,9 +490,8 @@ body {
 }
 
 #userName {
-    display:block;
-    color:#2569d5;
-    font-family:'Roboto';
-    font-size:1.7em;
+    display: block;
+    color: #2569d5;
+    font-family: 'Roboto';
+    font-size: 1.7em;
 }
-

@@ -1,1 +1,48 @@
-﻿
+﻿@model Forum.Models.User.ProfileListModel
+
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">Перегляд користувачів</div>
+    </div>
+    <div class="row" id="forumIndexContent">
+        <table class="table table-hover" id="userIndexTable">
+            <thead>
+                <tr>
+                    <th>Зображення</th>
+                    <th>Ім'я користувача</th>
+                    <th>E-mail</th>
+                    <th>Приєднався</th>
+                    <th>Рейтинг</th>
+                    <th>Роль адміністратора</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var profile in Model.Profiles)
+                {
+                    <tr class="userRow">
+                        <td>
+                            <div class="userProfilePic" style="background-image:url(@profile.ProfileImageUrl)"></div>
+                        </td>
+                        <td>
+                            @profile.UserName
+                        </td>
+                        <td>
+                            @profile.Email
+                        </td>
+                        <td>
+                            @profile.MemberSince
+                        </td>
+                        <td>
+                            @profile.UserRating
+                        </td>
+                        <td>
+                            @profile.IsAdmin.ToString()
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

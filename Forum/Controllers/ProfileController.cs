@@ -71,5 +71,27 @@ namespace Forum.Controllers
             //Redirect to the user's profile page
             return RedirectToAction("Detail", "Profile", new { id = userId });
         }
+
+
+        public IActionResult Index() 
+        {
+            var profiles = _userService.GetAll().OrderByDescending(user=>user.UserName)
+                .Select(u=>new ProfileModel 
+                {
+                    Email=u.Email,
+                    UserName=u.UserName,
+                    ProfileImageUrl = u.ProfileImageUrl,
+                    UserRating = u.Rating.ToString(),
+                    MemberSince = u.MemderSince,
+                    IsAdmin = _userManager.GetRolesAsync(u).Result.Contains("Admin")
+        });
+
+            var model = new ProfileListModel
+            {
+                Profiles = profiles,
+            };
+
+            return View(model);
+        }
     }
 }

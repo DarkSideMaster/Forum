@@ -12,7 +12,7 @@
     <div class="row" id="postIndexContent">
         <div class="col-md-3 postAuthorContainer">
             <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId" class="userNickName">@Model.AuthorName</a>
-             &nbsp;
+            &nbsp;
             <div class="postAuthorImage" style="background-image:url(@Model.AuthorImageUrl)"></div>
             @if (Model.IsAuthorAdmin)
             {
@@ -27,7 +27,7 @@
                 </span>
             }
             <br />
-            <span class="postData">@Model.Created.ToString("dd-MM-yyyy")</span>
+            <span class="postDate">@Model.Created.ToString("dd-MM-yyyy")</span>
         </div>
 
         <div class="col-md-9 postContentContainer">
@@ -38,7 +38,17 @@
     </div>
 
     <div class="row" id="replyDivider"></div>
-
+     @if (User.Identity.IsAuthenticated)
+    {
+        <br />
+        <div class="row" id="postIndexContentBtn">
+            <div class="col-md-3 postAuthorContainer">
+                <a asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">
+                    Відповісти
+                </a>
+            </div>
+        </div>
+    }
 
     @if (@Model.Replies.Any())
     {
@@ -47,7 +57,7 @@
             <div class="row" id="postIndexContent">
                 <div class="col-md-3 postAuthorContainer">
                     <a asp-controller="Profile" asp-action="Detail" asp-route-id="@reply.AuthorId" class="userNickName">@reply.AuthorName</a>
-                     &nbsp;
+                    &nbsp;
                     <div class="postAuthorImage" style="background-image:url(@reply.AuthorImageUrl)"></div>
                     @if (@reply.IsAuthorAdmin)
                     {
@@ -61,8 +71,8 @@
                             Користувач
                         </span>
                     }
-                    <br/>
-                     <span class="postData">@reply.Created.ToString("dd-MM-yyyy")</span>
+                    <br />
+                    <span class="postDate">@reply.Created.ToString("dd-MM-yyyy")</span>
                 </div>
 
                 <div class="col-md-9 postContentContainer">
@@ -71,21 +81,9 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row" id="replyDivider"></div>
+            <div class="row" id="replyDividers"></div>
         }
-    }
-    @if (User.Identity.IsAuthenticated)
-    {
-        <br />
-        <div class="row" id="postIndexContentBtn">
-            <div class="col-md-3 postAuthorContainer">
-                <a asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">
-                    Відповісти
-                </a>
-            </div>
-        </div>
-    }
+    }  
 
 </div>
 
