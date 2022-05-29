@@ -34,7 +34,7 @@ namespace Forum.Controllers
                 UserName = user.UserName,
                 UserRating = user.Rating.ToString(),
                 Email = user.Email,
-                ProfileImageUrl = user.ProfileImageUrl,
+                ProfileImageUrl = string.IsNullOrEmpty(user.ProfileImageUrl)? user.ProfileImageUrl ="/images/Users/defaultUser.png" : user.ProfileImageUrl,
                 MemberSince = user.MemderSince,
                 IsAdmin = userRoles.Contains("Admin")
             };

@@ -220,10 +220,32 @@ body {
     box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 6px 6px rgba(0,0,0,0.3);
 }
 
+.userNickName {
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Roboto Mono';
+    font-size:1em;
+}
+
 .isAdmin.smaller {
     font-family: 'Roboto';
-    font-weight:bold;
+    font-weight: bold;
+    font-size: 1.0em;
 }
+
+.isUser.smaller {
+    font-family: 'Roboto';
+    font-size: 0.8em;
+}
+
+
+.postContent {
+    border-left: 1px solid #d5d5d5;
+    height: 100%;
+    padding-left: 2em;
+}
+
+
 .postContentContainer {
     font-family: 'Roboto';
     color: #222;

@@ -11,12 +11,19 @@
     </div>
     <div class="row" id="postIndexContent">
         <div class="col-md-3 postAuthorContainer">
+            <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId" class="userNickName">@Model.AuthorName</a>
+             &nbsp;
             <div class="postAuthorImage" style="background-image:url(@Model.AuthorImageUrl)"></div>
-            <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId">@Model.AuthorName</a>
             @if (Model.IsAuthorAdmin)
             {
                 <span class="isAdmin smaller">
                     Адміністратор
+                </span>
+            }
+            else if (!Model.IsAuthorAdmin)
+            {
+                <span class="isUser smaller">
+                    Користувач
                 </span>
             }
             <br />
@@ -39,16 +46,23 @@
         {
             <div class="row" id="postIndexContent">
                 <div class="col-md-3 postAuthorContainer">
+                    <a asp-controller="Profile" asp-action="Detail" asp-route-id="@reply.AuthorId" class="userNickName">@reply.AuthorName</a>
+                     &nbsp;
                     <div class="postAuthorImage" style="background-image:url(@reply.AuthorImageUrl)"></div>
-                    <a asp-controller="Profile" asp-action="Detail" asp-route-id="@reply.AuthorId">@reply.AuthorName</a>
                     @if (@reply.IsAuthorAdmin)
                     {
                         <span class="isAdmin smaller">
                             Адміністратор
                         </span>
                     }
-                    <br />
-                    <span class="postData">@reply.Created.ToString("dd-MM-yyyy")</span>
+                    else if (!Model.IsAuthorAdmin)
+                    {
+                        <span class="isUser smaller">
+                            Користувач
+                        </span>
+                    }
+                    <br/>
+                     <span class="postData">@reply.Created.ToString("dd-MM-yyyy")</span>
                 </div>
 
                 <div class="col-md-9 postContentContainer">

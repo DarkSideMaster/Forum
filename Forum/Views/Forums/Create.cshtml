@@ -1,1 +1,43 @@
-﻿
+﻿@model Forum.Models.Forum.AddForumModel
+
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">
+            Створити новий форум
+        </div>
+    </div>
+    <div class="row">
+        <div id="createForumSection">
+            <form asp-action="AddForum" method="post" id="createForumForm" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Title">Назва форуму</label>
+                    <input asp-for="Title" class="form-control" placeholder="Назва форуму..." />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description">Зміст форуму</label>
+                    <input asp-for="Description" class="form-control" placeholder="Опис форуму..." />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div id="upLoad">
+                    <label>Завантажьте лого форуму</label>
+                    <br/>
+                    <label class="btn btn-default btn-file">
+                        Огляд
+                        <input asp-for="ImageUpload" typeof="file" style="display:none"/>
+                    </label>
+                </div>
+                <button type="submit" id="newFormBtn" classs="btn btn-submitPost">Створити форум</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
