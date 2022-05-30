@@ -1,24 +1,80 @@
 ﻿@model Forum.Models.Forum.ForumsIndexModel
 
 
-<h1>Форуми</h1>
 
-<table class="table table-hover" id="forumIndexTable">
-    <tbody>
-        @foreach (var forum in Model.ForumsList)
-        {
-            <tr>
-                <td>
-                    <a asp-controller ="Forums" asp-action="Topic" asp-route-id="@forum.Id">
-                        @forum.Name
-                    </a>                 
-                </td>
-                <td>
-                    @forum.Description
-                </td>
-            </tr>
-        }
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">Огляд форумів</div>
+        <div class="sectionDescription">
+            <p>
+                Ласкаво просимо до нашого ком'ютніті! Усі форуми розподілені по язиках програмування. Будь-ласка, ознаймтесь перед створенням нової теми
+                для обговорення з правилами нашої спільноти.
+            </p>
+            <p>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <span>
+                        Ви повинні бути
+                        <a asp-area="Identity" asp-page="/Account/Register">зареєстровані</a>, щоб спілкуватися на форумі.
+                    </span>
+                }
+            </p>
+        </div>
+    </div>
+    <div class="row" id="fornIndexContent">
+        <table class="table table-hover" id="forumIndexTable">
+            <tbody>
+                @foreach (var forum in Model.ForumsList)
+                {
+                    <tr>
+                        <td>
+                            <div class="forumLogo" style="background-image:url(@forum.ImageUrl)"></div>
+                            <div class="forumData">
+                                <div class="forumTitle">
+                                    <a asp-controller="Forums" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name </a>
+                                </div>
+                                <div class="forumSubTitle">
+                                    @if (forum.HasRecentPost)
+                                    {
+                                        <div class="hasRecentPost">Нове</div>
+                                    }
 
-    </tbody>
-</table>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="forumPostCount">
+                                @forum.NumberOfPosts Повідомлення
+                            </div>
+                            <div class="forumMemberCount">
+                                @forum.NumberOfUsers Користувачі
+                            </div>
+                        </td>
+                        <td>
+                            <div class="forumDescription">
+                                @forum.Description
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
 

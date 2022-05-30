@@ -31,12 +31,16 @@ namespace Forum.Controllers
             {
                 Id = forum.Id,
                 Name = forum.Title,
-                Description = forum.Description
+                Description = forum.Description,
+                NumberOfPosts = forum.Posts?.Count() ?? 0,
+                NumberOfUsers = _forumService.GetActiveUsers(forum.Id).Count(),
+                ImageUrl = forum.ImageUrl,
+                HasRecentPost = _forumService.HasRecentPost(forum.Id)
             });
 
             var model = new ForumsIndexModel
             {
-                ForumsList = forums
+                ForumsList = forums.OrderBy(f=>f.Name)
             };
 
             return View(model);

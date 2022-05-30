@@ -6,11 +6,11 @@ namespace Forum.Data
     {
         Forums GetbyId(int Id);
         IEnumerable<Forums> GetAll();
-        IEnumerable<ApplicationUser> GetAllActiveUsers();
 
         Task Create(Forums forum);
         Task Delete(int forumId);
-        Task UpdateForumDescription(int forumId, string newDescription);  
-
+        Task UpdateForumDescription(int forumId, string newDescription);
+        IEnumerable<ApplicationUser> GetActiveUsers(int id);
+        bool HasRecentPost(int id);
     }
 }

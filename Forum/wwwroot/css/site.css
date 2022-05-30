@@ -196,14 +196,15 @@ body {
 }
 
 .authorBlock {
-    padding:18px;
-    border:1px dashed #00AFCF;
-    margin-bottom:8px;
+    padding: 18px;
+    border: 1px dashed #00AFCF;
+    margin-bottom: 8px;
 }
 
 .noBorder {
-    border:none;
+    border: none;
 }
+
 .postAuthorImage {
     height: 80px;
     width: 80px;
@@ -374,10 +375,12 @@ body {
 
 
 #originalPost {
-    background-color:#fff;
-    padding:12px;
-    margin-bottom:8px;
+    background-color: #fff;
+    padding: 12px;
+    margin-bottom: 8px;
+    text-align:center;
 }
+
 .btn-back {
     background-color: #1E88E5;
     color: #fff !important;
@@ -386,7 +389,7 @@ body {
 }
 
     .btn-back:hover {
-        background-color: #555  !important;
+        background-color: #555 !important;
         transition: ease-in 0.1s;
     }
 
@@ -460,6 +463,15 @@ body {
     margin-right: 20px;
 }
 
+.hasRecentPost {
+    padding: 2px;
+    background-color: #fe552f;
+    color: white;
+    text-align: center;
+    border-radius: 1px;
+    width: 35px;
+    font-size: 10px;
+}
 
 
 .searchBar {
