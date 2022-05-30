@@ -19,11 +19,19 @@
                 <span class="isAdmin smaller">
                     Адміністратор
                 </span>
+                <br />
+                <span class="isUser smaller">
+                   Рейтинг: @Model.AuthorRating.ToString()                 
+                </span>
             }
             else if (!Model.IsAuthorAdmin)
             {
                 <span class="isUser smaller">
                     Користувач
+                </span>
+                <br />
+                <span class="isUser smaller">
+                   Рейтинг: @Model.AuthorRating.ToString()
                 </span>
             }
             <br />
@@ -38,7 +46,7 @@
     </div>
 
     <div class="row" id="replyDivider"></div>
-     @if (User.Identity.IsAuthenticated)
+    @if (User.Identity.IsAuthenticated)
     {
         <br />
         <div class="row" id="postIndexContentBtn">
@@ -64,11 +72,19 @@
                         <span class="isAdmin smaller">
                             Адміністратор
                         </span>
+                        <br/>
+                        <span class="isUser smaller">
+                            Рейтинг: @reply.AuthorRating.ToString()
+                        </span>
                     }
-                    else if (!Model.IsAuthorAdmin)
+                    else if (!reply.IsAuthorAdmin)
                     {
                         <span class="isUser smaller">
                             Користувач
+                        </span>
+                         <br/>
+                        <span class="isUser smaller">
+                           Рейтинг: @reply.AuthorRating.ToString()
                         </span>
                     }
                     <br />
@@ -83,7 +99,7 @@
             </div>
             <div class="row" id="replyDividers"></div>
         }
-    }  
+    }
 
 </div>
 

@@ -5,15 +5,16 @@
     <div class="row sectionHeader">
         <div class="sectionHeading">
             Відповідь | @Model.PostTitle
+            <div class="forumLogo" style="background-image: url(@Model.ForumImageUrl)"></div>
+            <span id="headingBtn">
+                <a asp-controller="Post" asp-action="Index" asp-route-id="@Model.PostId" class="btn btn-back">Повернутися</a>
+            </span>
         </div>
-        <div class="forumLogo" style="background-image: url(@Model.ForumImageUrl)"></div>
-        <span id="headingBtn">
-            <a asp-controller="Post" asp-action="Index" asp-route-id="@Model.PostId" class="btn btn-back">Повернутися</a>
-        </span>
+
     </div>
 
     <div class="row">
-        <div id="postReply">
+        <div id="originalPost">
             <h3>
                 @Model.PostTitle
             </h3>
@@ -23,9 +24,9 @@
         </div>
     </div>
     <div class="row">
-        <div id="createReply">
+        <div class="createPostSection">
             <div class="authorBlock">
-                Ви відповідаєте як @Model.AuthorName
+                Ви відповідаєте як <b>@Model.AuthorName</b>
             </div>
             <form asp-action="AddReply" method="post" id="addPostFrom">
                 <div asp-validation-summary="All" class="text-danger"> </div>
@@ -34,10 +35,11 @@
                     <textarea asp-for="ReplyContent" rows="20" class="form-control" placeholder="Ваша відповідь..."></textarea>
                     <span asp-validation-for="ReplyContent" class="text-danger"></span>
                 </div>
+                <br />
                 <button type="submit" id="submitReplyBtn" class="btn btn-submitPost">Відповісти</button>
-                <input asp-for="AuthorId" type="hidden"/>
-                <input asp-for="ForumId" type="hidden"/>
-                <input asp-for="PostId" type="hidden"/>
+                <input asp-for="AuthorId" type="hidden" />
+                <input asp-for="ForumId" type="hidden" />
+                <input asp-for="PostId" type="hidden" />
             </form>
         </div>
     </div>

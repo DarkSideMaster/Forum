@@ -195,7 +195,15 @@ body {
     background-color: #ddd;
 }
 
+.authorBlock {
+    padding:18px;
+    border:1px dashed #00AFCF;
+    margin-bottom:8px;
+}
 
+.noBorder {
+    border:none;
+}
 .postAuthorImage {
     height: 80px;
     width: 80px;
@@ -364,15 +372,21 @@ body {
     padding-top: 15px;
 }
 
+
+#originalPost {
+    background-color:#fff;
+    padding:12px;
+    margin-bottom:8px;
+}
 .btn-back {
-    background-color: #555;
+    background-color: #1E88E5;
     color: #fff !important;
     transition: ease-in 0.1s;
     border-radius: 0px !important;
 }
 
     .btn-back:hover {
-        background-color: #1E88E5 !important;
+        background-color: #555  !important;
         transition: ease-in 0.1s;
     }
 
