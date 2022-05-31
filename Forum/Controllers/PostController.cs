@@ -3,11 +3,13 @@ using Forum.Data.Interfaces;
 using Forum.Models;
 using Forum.Models.Posts;
 using Forum.Models.Reply;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.Controllers
 {
+   
     public class PostController : Controller
     {
         private readonly IPosts _postService;
@@ -53,7 +55,9 @@ namespace Forum.Controllers
             return _userManager.GetRolesAsync(user).Result.Contains("Admin");   
         }
 
+
         //id it is Forum.Id
+        [Authorize]
         public IActionResult CreatePost(int id) 
         {       
             var forum = _forumService.GetbyId(id);
@@ -70,6 +74,7 @@ namespace Forum.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddPost(NewPostModel model) 
         {
             var userId = _userManager.GetUserId(User);

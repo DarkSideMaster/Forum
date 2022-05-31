@@ -1,12 +1,14 @@
 ﻿using Forum.Data.Interfaces;
 using Forum.Models;
 using Forum.Models.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 
 namespace Forum.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
 
@@ -72,7 +74,7 @@ namespace Forum.Controllers
             return RedirectToAction("Detail", "Profile", new { id = userId });
         }
 
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Index() 
         {
             var profiles = _userService.GetAll().OrderByDescending(user=>user.UserName)

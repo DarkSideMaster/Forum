@@ -3,6 +3,7 @@ using Forum.Data.Interfaces;
 using Forum.Models;
 using Forum.Models.Forum;
 using Forum.Models.Posts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System.Net.Http.Headers;
@@ -116,6 +117,7 @@ namespace Forum.Controllers
             return RedirectToAction("Topic", new { id, searchQuery });
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Create() 
         {
             var model = new AddForumModel();
@@ -123,7 +125,7 @@ namespace Forum.Controllers
             return View(model);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AddForum(AddForumModel model) 
         {
