@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var connectionString = "";
 //builder.WebHost.ConfigureAppConfiguration((builderContext, config) => {
 //    IWebHostEnvironment env = builderContext.HostingEnvironment;
 //    config.AddJsonFile("storageAzureSettings.json", optional: false, reloadOnChange: true)
@@ -20,10 +20,21 @@ builder.Configuration.AddJsonFile(
      optional: false,
      reloadOnChange: true);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("ForumDBConnection") ?? throw new InvalidOperationException("Connection string 'ForumDBConnection' not found."); ;
+
+if (builder.Environment.IsProduction())
+{
+    // Add services to the container.
+     connectionString = builder.Configuration.GetConnectionString("ForumDBConnectionProduct") ?? throw new InvalidOperationException("Connection string 'ForumDBConnectionProduct' not found.");
+}
+else if (builder.Environment.IsDevelopment())
+{
+    // Add services to the container.
+      connectionString = builder.Configuration.GetConnectionString("ForumDBConnection") ?? throw new InvalidOperationException("Connection string 'ForumDBConnection' not found.");
+}
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -41,7 +52,10 @@ builder.Services.AddTransient<DataSeeder>();
 
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();
+
 var app = builder.Build();
+
+
 
 
 
@@ -50,12 +64,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
 }
-else
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+//else
+//{
+//    //app.UseExceptionHandler("/Home/Error");
+//    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+//    //app.UseHsts();
+//}
 
 app.UseHttpsRedirection();
 

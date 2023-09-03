@@ -11,7 +11,7 @@ namespace Forum.ForumServises
             var storageAccount = CloudStorageAccount.Parse(connectionString);
             var blobClient = storageAccount.CreateCloudBlobClient();
 
-            //имя не менять, так называется контейнер в Azure
+            //имя контейнера нельзя  менять, так называется контейнер в Azure
             return blobClient.GetContainerReference(containerNameInAzure);
         }
     }

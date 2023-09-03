@@ -8,20 +8,19 @@
     }
   },
   "profiles": {
-    "Forum": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
+    "Forum Development": {
+      "commandName": "IISExpress",
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7291;http://localhost:5291",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "IIS Express": {
-      "commandName": "IISExpress",
+    "Forum Production": {
+      "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     }
   }

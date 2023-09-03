@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System.Net.Http.Headers;
+using static Humanizer.In;
 
 namespace Forum.Controllers
 {
@@ -27,21 +28,28 @@ namespace Forum.Controllers
 
         public IActionResult Index()
         {
+            var allForumsList = _forumService.GetAll();
 
-            var forums = _forumService.GetAll().Select(forum => new ForumsListinigModel
+            var forumsList = new List<ForumsListinigModel>();
+
+            foreach (var item in allForumsList)
             {
-                Id = forum.Id,
-                Name = forum.Title,
-                Description = forum.Description,
-                NumberOfPosts = forum.Posts?.Count() ?? 0,
-                NumberOfUsers = _forumService.GetActiveUsers(forum.Id).Count(),
-                ImageUrl = forum.ImageUrl,
-                HasRecentPost = _forumService.HasRecentPost(forum.Id)
-            });
+                var forum = new ForumsListinigModel();
+
+                forum.Id = item.Id;
+                forum.Name = item.Title;
+                forum.Description = item.Description;
+                forum.NumberOfPosts = _forumService.GetActiveUsers(item.Id).Count();
+                forum.NumberOfUsers = _forumService.GetActiveUsers(item.Id).Count();
+                forum.ImageUrl = item.ImageUrl;
+                forum.HasRecentPost = _forumService.HasRecentPost(item.Id);
+                forumsList.Add(forum);
+            }
+
 
             var model = new ForumsIndexModel
             {
-                ForumsList = forums.OrderBy(f=>f.Name)
+                ForumsList = forumsList.OrderBy(f => f.Name)
             };
 
             return View(model);
@@ -54,21 +62,26 @@ namespace Forum.Controllers
 
             var posts = new List<Post>();
 
-            var isSucssesSearch = true; 
+            var isSucssesSearch = true;
 
             if (!string.IsNullOrEmpty(searchQuery))
             {
-                 posts = _postService.GetFiltredPosts(id, searchQuery).ToList();
-                if (posts!=null && posts.Count==0)
+                posts = _postService.GetFiltredPosts(id, searchQuery).ToList();
+
+                if (posts != null && posts.Count == 0)
                 {
                     isSucssesSearch = false;
                 }
             }
-            else
+            else if (forums==null)
+            {
+                return RedirectToAction("Index");
+            }
+            else 
             {
                 posts = forums.Posts;
             }
-            
+
             var postListings = posts.Select(post => new PostListingModel
             {
                 Id = post.Id,
