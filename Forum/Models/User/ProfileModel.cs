@@ -10,7 +10,9 @@
         public string ProfileImageUrl { set; get; }
         public DateTime MemberSince { set; get; }
         public bool IsAdmin { set; get; }
+        public bool IsModerator { set; get; }
+        public bool IsSuperModerator { set; get; }
         public IFormFile ImageUpload { set; get; }
-
+        public List<CurrentRole> CurrentRoles { set; get; }
     }
 }
