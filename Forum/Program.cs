@@ -6,6 +6,7 @@ using Forum.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Azure;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = "";
@@ -52,6 +53,11 @@ builder.Services.AddTransient<DataSeeder>();
 
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();
+builder.Services.AddAzureClients(clientBuilder =>
+{
+    clientBuilder.AddBlobServiceClient(builder.Configuration["AzureStorageAccount:blob"], preferMsi: true);
+    clientBuilder.AddQueueServiceClient(builder.Configuration["AzureStorageAccount:queue"], preferMsi: true);
+});
 
 var app = builder.Build();
 
