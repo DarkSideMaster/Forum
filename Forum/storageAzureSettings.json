@@ -1,5 +1,5 @@
 {
   "ConnectionStrings": {
-    "AzureStorageAccount": "DefaultEndpointsProtocol=https;AccountName=myforumdarksidemaster;AccountKey=pn4gZlUgqXDGQKcc+oAl+rYGCZGvb782si0/mGatpFCG+nQt1hOeO6NZqaf6/umldhBQztnTVLPT+ASt+5zsJA==;EndpointSuffix=core.windows.net"
+    "AzureStorageAccount": "DefaultEndpointsProtocol=https;AccountName=myforumdarksidemaster;AccountKey=hPFkhIfZgiTFkxT9Zwi0SHSq51rJDzRQKVQfBXQ1rNfGyzWCTylro4DXMzWXLRbdGEXqhgsWe1Hn+AStRx/C8A==;EndpointSuffix=core.windows.net"
   }
 }
