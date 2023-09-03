@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System.Net.Http.Headers;
-using static Humanizer.In;
 
 namespace Forum.Controllers
 {
