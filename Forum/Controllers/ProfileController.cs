@@ -50,11 +50,12 @@ namespace Forum.Controllers
         {
             var userId = _userManager.GetUserId(User);
 
+            var containerBlobName = "profile-images";
             //Connect Azure Storage Account Container
             var connectionString = _configuration.GetConnectionString("AzureStorageAccount");
 
             //Get Blob Container
-            var container = _uploadService.GetBlobContainer(connectionString, "profile-images");
+            var container = _uploadService.GetBlobContainer(connectionString, containerBlobName);
 
             //Parse the Content Disposition response header
             var contentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);

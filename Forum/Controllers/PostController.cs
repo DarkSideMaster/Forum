@@ -27,6 +27,12 @@ namespace Forum.Controllers
 
         public IActionResult Index( int id)
         {
+
+            if (id == 0)
+            {
+                return RedirectToAction("Index", "Forums");
+            }
+
             var  post = _postService.GetById(id);
 
             var replies = BuildPostReplies(post.Replies);

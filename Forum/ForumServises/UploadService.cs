@@ -6,13 +6,13 @@ namespace Forum.ForumServises
 {
     public class UploadService : IUpload
     {
-        public CloudBlobContainer GetBlobContainer(string connectionString, string containerNameinAzure) 
+        public CloudBlobContainer GetBlobContainer(string connectionString, string containerNameInAzure) 
         {
             var storageAccount = CloudStorageAccount.Parse(connectionString);
             var blobClient = storageAccount.CreateCloudBlobClient();
 
             //имя не менять, так называется контейнер в Azure
-            return blobClient.GetContainerReference(containerNameinAzure);
+            return blobClient.GetContainerReference(containerNameInAzure);
         }
     }
 }
