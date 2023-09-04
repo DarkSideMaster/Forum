@@ -1,6 +1,6 @@
 ﻿namespace Forum.Models
 {
-    public class CurrentRole
+    public class CurrentRoleModel
     {
         public int Id { get; set; }
         public string RoleName { get; set; }

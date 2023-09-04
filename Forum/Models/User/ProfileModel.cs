@@ -13,6 +13,7 @@
         public bool IsModerator { set; get; }
         public bool IsSuperModerator { set; get; }
         public IFormFile ImageUpload { set; get; }
-        public List<CurrentRole> CurrentRoles { set; get; }
+        public int  RoleId { set; get; }
+        public string RoleName { set; get; }
     }
 }

@@ -4,13 +4,13 @@ namespace Forum.ForumHelpers
 {
     public class Roles
     {
-        public List<CurrentRole> GetAllRoles()
+        public List<CurrentRoleModel> GetAllRoles()
         {
-            return new List<CurrentRole>
+            return new List<CurrentRoleModel>
             {
-                new CurrentRole() { Id = 1, RoleName = "Адміністратор",      Description = "Forum Administrator"},
-                new CurrentRole() { Id = 2, RoleName = "Головний модератор", Description = "Super Moderator"},
-                new CurrentRole() { Id = 3, RoleName = "Модератор",          Description = "Forum moderator"}
+                new CurrentRoleModel() { Id = 1, RoleName = "Адміністратор",      Description = "Forum Administrator"},
+                new CurrentRoleModel() { Id = 2, RoleName = "Головний модератор", Description = "Super Moderator"},
+                new CurrentRoleModel() { Id = 3, RoleName = "Модератор",          Description = "Forum moderator"}
             };
         }
     }

@@ -51,18 +51,51 @@ namespace Forum.Controllers
             foreach (var currentRole in getRolesList)
             {
                 model.RolesSelectList.Add(new SelectListItem
-                    { Text = currentRole.RoleName, Value = currentRole.Id.ToString()});
+                { Text = currentRole.RoleName, Value = currentRole.Id.ToString() });
             }
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult AddRoleToUser(ProfileListModel model)
+        public IActionResult AddRoleToUser(ProfileModel profile)
         {
-            var selectedRole = model.RolesSelectList;
-            
+
+            switch (profile.RoleId)
+            {
+                case (int)UserRoles.Adminstrator:
+                    {
+                        profile.RoleName = "Адміністратор";
+                        break;
+                    }
+                case (int)UserRoles.SuperModerator:
+                {
+                    profile.RoleName = "Супер модератор";
+                    break;
+                }
+                case (int)UserRoles.Moderator:
+                {
+                    profile.RoleName = "Модератор";
+                    break;
+                }
+                default:
+                    profile.RoleName = "";
+                    break;
+            }
+
+            var selectedRole = profile;
+
             return RedirectToAction("Index");
+        }
+
+
+
+
+        private enum UserRoles
+        {
+            Adminstrator = 1,
+            SuperModerator = 2,
+            Moderator = 3
         }
     }
 }

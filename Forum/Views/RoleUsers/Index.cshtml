@@ -8,48 +8,60 @@
     <div class="row" id="forumIndexContent">
         <table class="table table-hover" id="userIndexTable">
             <thead>
-            <tr>
-                <th>Ім'я користувача</th>
-                <th>E-mail</th>
-                <th>Адміністратор</th>
-                <th>Модератор</th>
-                <th>Супер модератор</th>
-                <th>Доступні ролі</th>
-            </tr>
+                <tr>
+                    <th>Ім'я користувача</th>
+                    <th>E-mail</th>
+                    <th>Адміністратор</th>
+                    <th>Модератор</th>
+                    <th>Супер модератор</th>
+                    <th>Доступні ролі</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var profile in Model.Profiles)
-            {
-                <tr class="userRow">
-                    <td>
+                @foreach (var profile in Model.Profiles)
+                {
+                    <tr class="userRow">
+                        <td>
                             <b>@profile.UserName</b>
-                    </td>
-                    <td>
-                        @profile.Email
-                    </td>
 
-                    <td>
-                        @profile.IsAdmin.ToString()
-                    </td>
-                    <td>
-                        @profile.IsModerator.ToString()
-                    </td>
-                    <td>
-                        @profile.IsSuperModerator.ToString()
-                    </td>
-                    <td>
-                        
-                        <form asp-controller="RoleUsers" asp-action="AddRoleToUser" method="post">
-                            
-                            <select class="form-select" asp-items="Model.RolesSelectList" ></select>
-                            <br/>
-                            <button type="submit" class="btn btn-primary">Зберегти</button>
-                        </form>
+                        </td>
+                        <td>
+                            @profile.Email
+                        </td>
 
-                        
-                    </td>
-                </tr>
-            }
+                        <td>
+                            @profile.IsAdmin.ToString()
+                        </td>
+                        <td>
+                            @profile.IsModerator.ToString()
+                        </td>
+                        <td>
+                            @profile.IsSuperModerator.ToString()
+                        </td>
+                        <td>
+
+                            <form method="post" enctype="multipart/form-data" asp-controller="RoleUsers" asp-action="AddRoleToUser" id="role" asp-route-id="@Model.Id">
+                                <input asp-for="@profile.IsModerator" class="form-control" type="hidden">
+                                <input asp-for="@profile.IsSuperModerator" class="form-control" type="hidden">
+                                <input asp-for="@profile.UserName" class="form-control" type="hidden">
+                                <input asp-for="@profile.Email" class="form-control" type="hidden">
+                                <input asp-for="@profile.IsAdmin" class="form-control" type="hidden">
+                                <input asp-for="@profile.UserId" class="form-control" type="hidden">
+                                <input asp-for="@profile.UserNickName" class="form-control" type="hidden">
+
+                                
+                                <select class="form-select" asp-items="Model.RolesSelectList" asp-for="@profile.RoleId">
+                                </select>
+
+
+                                <br />
+                                <button type="submit" class="btn btn-primary" value="Зберегти">Зберегти</button>
+                            </form>
+
+
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
