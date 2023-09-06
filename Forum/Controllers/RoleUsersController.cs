@@ -69,15 +69,20 @@ namespace Forum.Controllers
                         break;
                     }
                 case (int)UserRoles.SuperModerator:
-                {
-                    profile.RoleName = "Супер модератор";
-                    break;
-                }
+                    {
+                        profile.RoleName = "Супер модератор";
+                        break;
+                    }
                 case (int)UserRoles.Moderator:
-                {
-                    profile.RoleName = "Модератор";
-                    break;
-                }
+                    {
+                        profile.RoleName = "Модератор";
+                        break;
+                    }
+                case (int)UserRoles.User:
+                    {
+                        profile.RoleName = "Користувач";
+                        break;
+                    }
                 default:
                     profile.RoleName = "";
                     break;
@@ -95,7 +100,8 @@ namespace Forum.Controllers
         {
             Adminstrator = 1,
             SuperModerator = 2,
-            Moderator = 3
+            Moderator = 3,
+            User = 4
         }
     }
 }
